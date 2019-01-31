@@ -28,4 +28,17 @@ public class LoginFragmentTest {
         assertTrue(usernameEditText instanceof EditText);
         assertEquals(usernameEditText.getVisibility(), View.VISIBLE);
     }
+
+    @Test
+    public void onCreateView_shouldDisplayPasswordEditText() {
+        LoginFragment loginFragment = SupportFragmentController
+                .of(LoginFragment.newInstance(), LoginActivity.class)
+                .create(R.id.fragment_container, new Bundle()).start().get();
+
+        View rootView = loginFragment.getView();
+        assertNotNull(rootView);
+        View usernameEditText = rootView.findViewById(R.id.password_input);
+        assertTrue(usernameEditText instanceof EditText);
+        assertEquals(usernameEditText.getVisibility(), View.VISIBLE);
+    }
 }
