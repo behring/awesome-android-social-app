@@ -1,4 +1,4 @@
-package com.thoughtworks.awesomesocialapp.ui.main;
+package com.thoughtworks.awesomesocialapp.main;
 
 import android.arch.lifecycle.ViewModel;
 

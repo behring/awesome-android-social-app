@@ -2,6 +2,10 @@ package com.thoughtworks.awesomesocialapp;
 
 import android.support.test.filters.SmallTest;
 import android.support.v4.app.Fragment;
+
+import com.thoughtworks.awesomesocialapp.login.LoginActivity;
+import com.thoughtworks.awesomesocialapp.login.LoginFragment;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;

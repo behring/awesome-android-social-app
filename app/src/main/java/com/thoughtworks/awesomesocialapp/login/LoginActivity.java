@@ -1,7 +1,9 @@
-package com.thoughtworks.awesomesocialapp;
+package com.thoughtworks.awesomesocialapp.login;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.thoughtworks.awesomesocialapp.R;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG_LOGIN_FRAGMENT = "login_fragment";

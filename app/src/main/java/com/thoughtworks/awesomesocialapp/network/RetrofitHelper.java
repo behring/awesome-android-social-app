@@ -3,6 +3,7 @@ package com.thoughtworks.awesomesocialapp.network;
 import com.thoughtworks.awesomesocialapp.constants.NetworkContants;
 
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHelper {
     private static Retrofit retrofit;
@@ -11,6 +12,7 @@ public class RetrofitHelper {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(NetworkContants.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
