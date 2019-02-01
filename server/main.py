@@ -7,16 +7,16 @@ app = Flask(__name__)
 
 @app.route('/login', methods=['POST'])
 def login() -> 'json':
-    username = request.form.get('uname')
-    password = request.form.get('pwd')
+    account_name = request.form.get('account_name')
+    password = request.form.get('password')
     response = {}
-    if username == 'behring' and password == '111111':
+    if account_name == 'behring' and password == '111111':
         response['code'] = 0
         response['message'] = 'login success'
         response['data'] = {'token': '123132r24er2dsfdsf'}
     else:
         response['code'] = -1
-        response['message'] = 'username or password error'
+        response['message'] = 'account name or password error'
     return json.dumps(response, ensure_ascii=False)
 
 

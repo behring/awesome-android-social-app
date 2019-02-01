@@ -1,28 +1,16 @@
 package com.thoughtworks.awesomesocialapp.network;
 
+import com.thoughtworks.awesomesocialapp.models.User;
 import com.thoughtworks.awesomesocialapp.network.models.ResponseResult;
 import com.thoughtworks.awesomesocialapp.network.services.LoginService;
-
+import java.io.IOException;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ServerApi {
 
-    public static void login(String username, String password) {
+    public static ResponseResult<User> login(String accountName, String password) throws IOException {
         LoginService loginService = RetrofitHelper.getRetrofit().create(LoginService.class);
-        Call<ResponseResult> call = loginService.login(username,password);
-        call.enqueue(new Callback<ResponseResult>() {
-            @Override
-            public void onResponse(Call<ResponseResult> call, Response<ResponseResult> response) {
-                response.body();
-            }
-
-            @Override
-            public void onFailure(Call<ResponseResult> call, Throwable t) {
-
-            }
-        });
-
+        Call<ResponseResult<User>> call = loginService.login(accountName, password);
+        return call.execute().body();
     }
 }
