@@ -16,12 +16,16 @@ import com.thoughtworks.awesomesocialapp.main.MainActivity;
 import com.thoughtworks.awesomesocialapp.models.User;
 
 public class LoginFragment extends Fragment implements View.OnClickListener, LoginViewModel.OnLoginListener {
-    private LoginViewModel mViewModel;
+    private LoginViewModel viewModel;
     private EditText accountNameEditText;
     private EditText passwordEditText;
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
+    }
+
+    public void setViewModel(LoginViewModel viewModel) {
+        this.viewModel = viewModel;
     }
 
     @Override
@@ -37,14 +41,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        setViewModel(ViewModelProviders.of(this).get(LoginViewModel.class));
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_button:
-                mViewModel.login(accountNameEditText.getText().toString(),
+                viewModel.login(accountNameEditText.getText().toString(),
                         passwordEditText.getText().toString(), this);
                 break;
             default:

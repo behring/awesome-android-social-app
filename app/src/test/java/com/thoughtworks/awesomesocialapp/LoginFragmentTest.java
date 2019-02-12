@@ -17,13 +17,16 @@ import com.thoughtworks.awesomesocialapp.network.models.ResponseResult;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.support.v4.SupportFragmentController;
-
 import java.io.IOException;
+import java.util.Objects;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 @RunWith(RobolectricTestRunner.class)
 @SmallTest
@@ -65,26 +68,25 @@ public class LoginFragmentTest {
     }
 
     @Test
-    public void testLoginApiSuccess() throws IOException {
-        ResponseResult responseResult = new ResponseResult();
-        responseResult.setCode(0);
+    public void testLoginSuccess() {
+        LoginViewModel mockLoginViewModel = mock(LoginViewModel.class);
 
-        LoginViewModel loginViewModel = ViewModelProviders.of(activity).get(LoginViewModel.class);
-        loginViewModel.login(DEFAULT_ACCOUNT_NAME, DEFAULT_PASSWORD, new LoginViewModel.OnLoginListener() {
+        LoginFragment loginFragment = setupLoginFragment();
+        loginFragment.setViewModel(mockLoginViewModel);
+
+        doAnswer(new Answer() {
             @Override
-            public void onLoginSuccess(User user) {
-                assertNotNull(user);
-                assertEquals(user.getAccountName(), DEFAULT_ACCOUNT_NAME);
-                Intent expectedIntent = new Intent(activity, MainActivity.class);
-                Intent actualIntent = Shadows.shadowOf(activity).getNextStartedActivity();
-                assertEquals(expectedIntent.getComponent(), actualIntent.getComponent());
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                ((LoginViewModel.OnLoginListener)invocation.getArguments()[2]).onLoginSuccess(any(User.class));
+                return null;
             }
+        }).when(mockLoginViewModel).login(anyString(), anyString(), any(LoginViewModel.OnLoginListener.class));
 
-            @Override
-            public void onLoginFailure(Throwable throwable) {
+        Objects.requireNonNull(loginFragment.getView()).findViewById(R.id.login_button).performClick();
 
-            }
-        });
+        Intent expectedIntent = new Intent(activity, MainActivity.class);
+        Intent actualIntent = Shadows.shadowOf(activity).getNextStartedActivity();
+        assertEquals(expectedIntent.getComponent(), actualIntent.getComponent());
     }
 
     private View getRootView() {
