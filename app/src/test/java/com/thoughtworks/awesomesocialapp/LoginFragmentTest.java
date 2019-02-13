@@ -20,13 +20,19 @@ import org.junit.runner.RunWith;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowToast;
 import org.robolectric.shadows.support.v4.SupportFragmentController;
+
 import java.io.IOException;
 import java.util.Objects;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @SmallTest
@@ -68,6 +74,27 @@ public class LoginFragmentTest {
     }
 
     @Test
+    public void testLoginFailure() {
+        LoginViewModel mockLoginViewModel = mock(LoginViewModel.class);
+
+        LoginFragment loginFragment = setupLoginFragment();
+        loginFragment.setViewModel(mockLoginViewModel);
+
+        doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                ((LoginViewModel.OnLoginListener) invocation.getArguments()[2]).onLoginFailure(any(Throwable.class));
+                return null;
+            }
+        }).when(mockLoginViewModel).login(anyString(), anyString(), any(LoginViewModel.OnLoginListener.class));
+
+        Objects.requireNonNull(loginFragment.getView()).findViewById(R.id.login_button).performClick();
+
+        assertEquals(ShadowToast.getTextOfLatestToast(), ApplicationProvider.getApplicationContext()
+                .getString(R.string.login_failure));
+    }
+
+    @Test
     public void testLoginSuccess() {
         LoginViewModel mockLoginViewModel = mock(LoginViewModel.class);
 
@@ -77,7 +104,7 @@ public class LoginFragmentTest {
         doAnswer(new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                ((LoginViewModel.OnLoginListener)invocation.getArguments()[2]).onLoginSuccess(any(User.class));
+                ((LoginViewModel.OnLoginListener) invocation.getArguments()[2]).onLoginSuccess(any(User.class));
                 return null;
             }
         }).when(mockLoginViewModel).login(anyString(), anyString(), any(LoginViewModel.OnLoginListener.class));
@@ -85,7 +112,7 @@ public class LoginFragmentTest {
         Objects.requireNonNull(loginFragment.getView()).findViewById(R.id.login_button).performClick();
 
         Intent expectedIntent = new Intent(activity, MainActivity.class);
-        Intent actualIntent = Shadows.shadowOf(activity).getNextStartedActivity();
+        Intent actualIntent = shadowOf(activity).getNextStartedActivity();
         assertEquals(expectedIntent.getComponent(), actualIntent.getComponent());
     }
 

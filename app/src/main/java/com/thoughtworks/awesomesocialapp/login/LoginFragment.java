@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.thoughtworks.awesomesocialapp.R;
 import com.thoughtworks.awesomesocialapp.main.MainActivity;
@@ -63,6 +64,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
 
     @Override
     public void onLoginFailure(Throwable throwable) {
-
+        Toast.makeText(getActivity(), getString(R.string.login_failure), Toast.LENGTH_SHORT).show();
     }
 }
