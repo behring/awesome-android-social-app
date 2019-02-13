@@ -2,13 +2,16 @@ package com.thoughtworks.awesomesocialapp.login;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,6 +23,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
     private LoginViewModel viewModel;
     private EditText accountNameEditText;
     private EditText passwordEditText;
+    private Button loginButton;
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
@@ -35,7 +39,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         accountNameEditText = rootView.findViewById(R.id.account_name_input);
         passwordEditText = rootView.findViewById(R.id.password_input);
-        rootView.findViewById(R.id.login_button).setOnClickListener(this);
+        passwordEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                Log.d("zhaolin", "getGlobalVisibleRect: " + loginButton.getGlobalVisibleRect(new Rect()));
+            }
+        });
+
+        loginButton = rootView.findViewById(R.id.login_button);
+        loginButton.setOnClickListener(this);
         return rootView;
     }
 

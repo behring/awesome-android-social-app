@@ -1,4 +1,4 @@
-package com.thoughtworks.awesomesocialapp;
+package com.thoughtworks.awesomesocialapp.login;
 
 import android.support.test.filters.SmallTest;
 import android.support.v4.app.Fragment;
