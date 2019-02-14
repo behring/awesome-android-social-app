@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.thoughtworks.awesomesocialapp.R;
+import com.thoughtworks.awesomesocialapp.common.view.ProgressDialog;
 import com.thoughtworks.awesomesocialapp.main.MainActivity;
 import com.thoughtworks.awesomesocialapp.models.User;
 
@@ -61,6 +62,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_button:
+                new ProgressDialog.Builder(getActivity()).setText("Logging in...").create().show();
                 viewModel.login(accountNameEditText.getText().toString(),
                         passwordEditText.getText().toString(), this);
                 break;
