@@ -1,5 +1,6 @@
 package com.thoughtworks.awesomesocialapp.login;
 
+import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -24,7 +25,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
     private LoginViewModel viewModel;
     private EditText accountNameEditText;
     private EditText passwordEditText;
-    private Button loginButton;
+    private ProgressDialog progressDialog;
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
@@ -40,15 +41,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         accountNameEditText = rootView.findViewById(R.id.account_name_input);
         passwordEditText = rootView.findViewById(R.id.password_input);
-        passwordEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                Log.d("zhaolin", "getGlobalVisibleRect: " + loginButton.getGlobalVisibleRect(new Rect()));
-            }
-        });
-
-        loginButton = rootView.findViewById(R.id.login_button);
-        loginButton.setOnClickListener(this);
+        rootView.findViewById(R.id.login_button).setOnClickListener(this);
         return rootView;
     }
 
@@ -62,7 +55,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_button:
-                new ProgressDialog.Builder(getActivity()).setText("Logging in...").create().show();
+                showProgressDialog();
                 viewModel.login(accountNameEditText.getText().toString(),
                         passwordEditText.getText().toString(), this);
                 break;
@@ -73,11 +66,27 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
 
     @Override
     public void onLoginSuccess(User user) {
+        hideProgressDialog();
         startActivity(new Intent(getActivity(), MainActivity.class));
     }
 
     @Override
     public void onLoginFailure(Throwable throwable) {
+        hideProgressDialog();
         Toast.makeText(getActivity(), getString(R.string.login_failure), Toast.LENGTH_SHORT).show();
+    }
+
+    private void showProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog.Builder(getActivity()).setText("Logging in...").create();
+        }
+        progressDialog.show();
+    }
+
+    private void hideProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.hide();
+            progressDialog = null;
+        }
     }
 }
