@@ -7,7 +7,7 @@
     tools:context=".login.LoginFragment">
 
     <EditText
-        style="@style/EditText"
+        style="@style/EditTextStyle"
         android:id="@+id/account_name_input"
         android:hint="@string/input_account_name"
         app:layout_constraintTop_toTopOf="parent"
@@ -15,7 +15,7 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <EditText
-        style="@style/EditText"
+        style="@style/EditTextStyle"
         android:id="@+id/password_input"
         android:layout_marginTop="8dp"
         android:hint="@string/input_password"
@@ -24,7 +24,7 @@
         app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
-        style="@style/Button"
+        style="@style/ButtonStyle"
         android:id="@+id/login_button"
         android:layout_marginTop="8dp"
         android:text="@string/login"

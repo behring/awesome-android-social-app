@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="charcoal_dark">#242a34</color>
+    <color name="charcoal_light">#78849c</color>
+    <color name="charcoal_lighter">#a6aebc</color>
+    <color name="gray_medium">#bdc3cd</color>
+    <color name="grey_light">#e6eaf2</color>
+    <color name="grey_lighter">#f3f6fa</color>
+    <color name="blue_dark">#2979ff</color>
+    <color name="green_dark">#00865a</color>
+    <color name="green">#02b376</color>
+    <color name="red_dark">#e70f08</color>
+    <color name="red">#f83a00</color>
+    <color name="orange_dark">#f07300</color>
+    <color name="orange">#ff9300</color>
+    <color name="blue">#2c86ff</color>
+    <color name="white">#ffffff</color>
+    <color name="blue_press">#2a80f5</color>
+    <color name="green_press">#01ab71</color>
+    <color name="red_press">#ed3700</color>
+    <color name="orange_press">#f58d00</color>
+    <color name="secondary">#373f54</color>
+    <color name="primary">#2daaf3</color>
+    <color name="light_periwinkle">#d8dde8</color>
+    <color name="red_coral">#ff5e3a</color>
+    <color name="secondary_gradient">#374264</color>
+    <color name="translucent_black">#c0000000</color>
 </resources>

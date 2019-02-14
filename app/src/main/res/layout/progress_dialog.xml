@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        style="@style/ProgressDialogRootViewStyle">
+        <ProgressBar
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="12dp"
+            android:indeterminateDrawable="@drawable/progress_bar_indeterminate_drawable"
+            android:indeterminateDuration="1000"
+            />
+        <TextView
+            style="@style/TextStyle"
+            android:id="@+id/text"
+            tools:text="Logging in..."/>
+    </LinearLayout>
+</layout>
