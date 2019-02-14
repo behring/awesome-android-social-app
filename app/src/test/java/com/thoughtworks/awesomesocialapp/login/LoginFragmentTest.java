@@ -13,8 +13,6 @@ import com.thoughtworks.awesomesocialapp.main.MainActivity;
 import com.thoughtworks.awesomesocialapp.models.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowDialog;
 import org.robolectric.shadows.ShadowToast;
@@ -69,12 +67,9 @@ public class LoginFragmentTest {
         LoginFragment loginFragment = setupLoginFragment();
         loginFragment.setViewModel(mockLoginViewModel);
 
-        doAnswer(new Answer() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                ((LoginViewModel.OnLoginListener) invocation.getArguments()[2]).onLoginFailure(any(Throwable.class));
-                return null;
-            }
+        doAnswer(invocation -> {
+            ((LoginViewModel.OnLoginListener) invocation.getArguments()[2]).onLoginFailure(any(Throwable.class));
+            return null;
         }).when(mockLoginViewModel).login(anyString(), anyString(), any(LoginViewModel.OnLoginListener.class));
 
         Objects.requireNonNull(loginFragment.getView()).findViewById(R.id.login_button).performClick();
@@ -90,12 +85,9 @@ public class LoginFragmentTest {
         LoginFragment loginFragment = setupLoginFragment();
         loginFragment.setViewModel(mockLoginViewModel);
 
-        doAnswer(new Answer() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                ((LoginViewModel.OnLoginListener) invocation.getArguments()[2]).onLoginSuccess(any(User.class));
-                return null;
-            }
+        doAnswer(invocation -> {
+            ((LoginViewModel.OnLoginListener) invocation.getArguments()[2]).onLoginSuccess(any(User.class));
+            return null;
         }).when(mockLoginViewModel).login(anyString(), anyString(), any(LoginViewModel.OnLoginListener.class));
 
         Objects.requireNonNull(loginFragment.getView()).findViewById(R.id.login_button).performClick();
