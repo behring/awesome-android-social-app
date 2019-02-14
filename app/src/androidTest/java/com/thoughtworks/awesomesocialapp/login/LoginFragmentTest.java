@@ -1,6 +1,7 @@
 package com.thoughtworks.awesomesocialapp.login;
 
 import com.thoughtworks.awesomesocialapp.R;
+import com.thoughtworks.awesomesocialapp.ToastMatcher;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,7 +14,6 @@ import static androidx.test.espresso.action.ViewActions.*;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
-import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 @MediumTest
@@ -25,10 +25,19 @@ public class LoginFragmentTest {
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
-    public void onClickLoginButton_shouldLoginSuccess() {
+    public void typeCorrectLoginInfo_shouldLoginSuccess() {
         onView(withId(R.id.account_name_input)).perform(typeText(DEFAULT_ACCOUNT_NAME));
         onView(withId(R.id.password_input)).perform(typeText(DEFAULT_PASSWORD));
         onView(withText(R.string.login)).perform(click());
         onView(withText("MainFragment")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void typeIncorrectLoginInfo_shouldLoginFailure() {
+        onView(withId(R.id.account_name_input)).perform(typeText(DEFAULT_ACCOUNT_NAME));
+        onView(withId(R.id.password_input)).perform(typeText("error password"));
+        onView(withText(R.string.login)).perform(click());
+        onView(withText(R.string.login_failure)).inRoot(new ToastMatcher()).check(matches(isDisplayed()));
+
     }
 }
