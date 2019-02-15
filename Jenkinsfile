@@ -3,22 +3,22 @@ pipeline {
 
     stages {
 
-//        stage('SonarQube analysis') {
-//            steps {
-//                script {
-//                    withSonarQubeEnv('SonarQube Server') {
-//                        sh './gradlew sonarqube -Dsonar.host.url=http://sonarqube:9000'
-//                    }
-//
-//                    timeout(time: 1, unit: 'HOURS') {
-//                        def qg = waitForQualityGate()
-//                        if (qg.status != 'OK') {
-//                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        stage('SonarQube analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQube Server') {
+                        sh './gradlew sonarqube -Dsonar.host.url=http://sonarqube:9000'
+                    }
+
+                    timeout(time: 1, unit: 'HOURS') {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                        }
+                    }
+                }
+            }
+        }
 
         stage('Run Emulator') {
             steps {
