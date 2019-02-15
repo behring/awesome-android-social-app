@@ -68,7 +68,7 @@ public class LoginFragmentTest {
         loginFragment.setViewModel(mockLoginViewModel);
 
         doAnswer(invocation -> {
-            ((LoginViewModel.OnLoginListener) invocation.getArguments()[2]).onLoginFailure(any(Throwable.class));
+            ((LoginViewModel.OnLoginListener) invocation.getArguments()[2]).onLoginFailure(mock(Throwable.class));
             return null;
         }).when(mockLoginViewModel).login(anyString(), anyString(), any(LoginViewModel.OnLoginListener.class));
 
@@ -86,7 +86,7 @@ public class LoginFragmentTest {
         loginFragment.setViewModel(mockLoginViewModel);
 
         doAnswer(invocation -> {
-            ((LoginViewModel.OnLoginListener) invocation.getArguments()[2]).onLoginSuccess(any(User.class));
+            ((LoginViewModel.OnLoginListener) invocation.getArguments()[2]).onLoginSuccess(mock(User.class));
             return null;
         }).when(mockLoginViewModel).login(anyString(), anyString(), any(LoginViewModel.OnLoginListener.class));
 
