@@ -49,6 +49,7 @@ pipeline {
 
         stage('Android Test') {
             steps {
+                sh './server/run.sh'
                 sh './gradlew connectedAndroidTest'
             }
         }
