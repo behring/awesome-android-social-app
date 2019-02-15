@@ -49,7 +49,7 @@ pipeline {
 
         stage('Android Test') {
             steps {
-                sh './server/run.sh'
+                sh 'cd server && ./run.sh'
                 sh './gradlew connectedAndroidTest'
             }
         }
