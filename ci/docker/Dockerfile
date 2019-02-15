@@ -2,7 +2,7 @@ FROM jenkins/jenkins:lts
 MAINTAINER Behring Zhao <behring.zhao@gmail.com>
 
 ARG ANDROID_SDK_TOOLS_ZIP=sdk-tools-linux-4333796.zip
-ARG GRADLE_VERSION=4.6
+ARG GRADLE_VERSION=4.10.1
 
 ENV GRADLE_NAME gradle-$GRADLE_VERSION
 ENV GRADLE_ZIP gradle-$GRADLE_VERSION-bin.zip
