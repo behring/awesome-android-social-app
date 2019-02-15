@@ -32,6 +32,9 @@ RUN mkdir -p $ANDROID_HOME \
 RUN yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses \
 	&& yes | android update sdk --no-ui --all --filter platform-tools,android-28,build-tools-28.0.3
 
+#Install flask
+RUN apt -y install python-pip && pip install Flask
+
 USER jenkins
 # List desired Jenkins plugins here
 RUN /usr/local/bin/install-plugins.sh workflow-aggregator git android-lint build-monitor-plugin sonar
