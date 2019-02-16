@@ -19,8 +19,17 @@ android {
 
         debug {
             testCoverageEnabled true
+            buildConfigField "String", "BASE_URL", '"http://10.0.2.2:5000/"'
+        }
+
+        ci {
+            testCoverageEnabled true
+            buildConfigField "String", "BASE_URL", '"http://jenkins:5000/"'
         }
     }
+
+    testBuildType "ci"
+
     testOptions {
         unitTests {
             includeAndroidResources = true

@@ -3,26 +3,26 @@ pipeline {
 
     stages {
 
-//        stage('Lint') {
-//            steps {
-//                script {
-//                    try {
-//                        sh './gradlew lint'
-//                    } catch (err) {
-//                        androidLint()
-//                        currentBuild.result = 'FAILURE'
-//                        error('Lint found issues...')
-//                        throw err
-//                    }
-//                }
-//            }
-//        }
-//
-//        stage('Unit Test') {
-//            steps {
-//                sh './gradlew test'
-//            }
-//        }
+        stage('Lint') {
+            steps {
+                script {
+                    try {
+                        sh './gradlew lintCi'
+                    } catch (err) {
+                        androidLint()
+                        currentBuild.result = 'FAILURE'
+                        error('Lint found issues...')
+                        throw err
+                    }
+                }
+            }
+        }
+
+        stage('Unit Test') {
+            steps {
+                sh './gradlew testCiUnitTest'
+            }
+        }
 
         stage('Run Emulator') {
             steps {
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 sh 'cd server && ./run.sh &'
                 sh 'cd ..'
-                sh './gradlew connectedAndroidTest'
+                sh './gradlew connectedCiAndroidTest'
                 sh 'kill $(lsof -t -i:5000)'
             }
         }
