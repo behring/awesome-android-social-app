@@ -7,7 +7,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube Server') {
-                        sh './gradlew sonarqube -Dsonar.host.url=http://sonarqube:9000'
+                        sh './gradlew sonarqube -Dsonar.host.url=http://jenkins:9000'
                     }
 
                     timeout(time: 1, unit: 'HOURS') {
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Run Emulator') {
             steps {
-                sh 'adb connect emulator'
+                sh 'adb connect jenkins'
             }
         }
 
