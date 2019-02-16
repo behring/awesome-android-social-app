@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
+apply plugin: 'checkstyle'
 
 android {
     compileSdkVersion 28
@@ -90,6 +91,20 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
             "jacoco/testDebugUnitTest.exec",
             "outputs/code_coverage/debugAndroidTest/connected/*coverage.ec"
     ])
+}
+
+task checkstyle(type: Checkstyle) {
+    description = "Check Java style with Checkstyle"
+    configFile = rootProject.file("config/checkstyle/sun_checks.xml")
+    source ='src/main/java'
+    classpath = files()
+    ignoreFailures = true
+
+    reports {
+        xml.enabled false
+        html.enabled true
+        html.stylesheet resources.text.fromFile('../config/xsl/checkstyle-frames.xsl')
+    }
 }
 
 dependencies {
