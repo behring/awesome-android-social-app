@@ -3,6 +3,42 @@ pipeline {
 
     stages {
 
+//        stage('Lint') {
+//            steps {
+//                script {
+//                    try {
+//                        sh './gradlew lint'
+//                    } catch (err) {
+//                        androidLint()
+//                        currentBuild.result = 'FAILURE'
+//                        error('Lint found issues...')
+//                        throw err
+//                    }
+//                }
+//            }
+//        }
+//
+//        stage('Unit Test') {
+//            steps {
+//                sh './gradlew test'
+//            }
+//        }
+
+        stage('Run Emulator') {
+            steps {
+                sh 'adb connect jenkins'
+            }
+        }
+
+        stage('Android Test') {
+            steps {
+                sh 'cd server && ./run.sh &'
+                sh 'cd ..'
+                sh './gradlew connectedAndroidTest'
+                sh 'kill $(lsof -t -i:5000)'
+            }
+        }
+
         stage('SonarQube analysis') {
             steps {
                 script {
@@ -17,42 +53,6 @@ pipeline {
                         }
                     }
                 }
-            }
-        }
-
-        stage('Run Emulator') {
-            steps {
-                sh 'adb connect jenkins'
-            }
-        }
-
-        stage('Lint') {
-            steps {
-                script {
-                    try {
-                        sh './gradlew lint'
-                    } catch (err) {
-                        androidLint()
-                        currentBuild.result = 'FAILURE'
-                        error('Lint found issues...')
-                        throw err
-                    }
-                }
-            }
-        }
-
-        stage('Unit Test') {
-            steps {
-                sh './gradlew test'
-            }
-        }
-
-        stage('Android Test') {
-            steps {
-                sh 'cd server && ./run.sh &'
-                sh 'cd ..'
-                sh './gradlew connectedAndroidTest'
-                sh 'kill $(lsof -t -i:5000)'
             }
         }
 
