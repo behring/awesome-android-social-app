@@ -7,7 +7,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube Server') {
-                        sh './gradlew sonarqube -Dsonar.host.url=http://127.0.0.1:9000'
+                        sh './gradlew sonarqube -Dsonar.host.url=http://localhost:9000'
                     }
 
                     timeout(time: 5, unit: 'MINUTES') {
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Run Emulator') {
             steps {
-                sh 'adb connect 127.0.0.1'
+                sh 'adb connect localhost'
             }
         }
 
