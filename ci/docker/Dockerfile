@@ -33,7 +33,7 @@ RUN yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses \
 	&& yes | android update sdk --no-ui --all --filter platform-tools,android-28,build-tools-28.0.3
 
 #Install flask
-RUN apt -y install python-pip && pip install Flask
+RUN apt-get install lsof && apt-get -y install python-pip && pip install Flask
 
 USER jenkins
 # List desired Jenkins plugins here
