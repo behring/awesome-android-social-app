@@ -49,7 +49,8 @@ pipeline {
 
         stage('Android Test') {
             steps {
-                sh ' cd server; ./run.sh &; cd ..'
+                sh 'cd server && ./run.sh &'
+                sh 'cd ..'
                 sh './gradlew connectedAndroidTest'
                 sh 'kill $(lsof -t -i:5000)'
             }
