@@ -7,7 +7,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube Server') {
-                        sh './gradlew sonarqube -Dsonar.host.url=http://jenkins:9000'
+                        sh './gradlew sonarqube -Dsonar.host.url=http://localhost:9000'
                     }
 
                     timeout(time: 5, unit: 'MINUTES') {
@@ -22,30 +22,30 @@ pipeline {
 
         stage('Run Emulator') {
             steps {
-                sh 'adb connect jenkins'
+                sh 'adb connect localhost'
             }
         }
 
-        stage('Lint') {
-            steps {
-                script {
-                    try {
-                        sh './gradlew lint'
-                    } catch (err) {
-                        androidLint()
-                        currentBuild.result = 'FAILURE'
-                        error('Lint found issues...')
-                        throw err
-                    }
-                }
-            }
-        }
-
-        stage('Unit Test') {
-            steps {
-                sh './gradlew test'
-            }
-        }
+//        stage('Lint') {
+//            steps {
+//                script {
+//                    try {
+//                        sh './gradlew lint'
+//                    } catch (err) {
+//                        androidLint()
+//                        currentBuild.result = 'FAILURE'
+//                        error('Lint found issues...')
+//                        throw err
+//                    }
+//                }
+//            }
+//        }
+//
+//        stage('Unit Test') {
+//            steps {
+//                sh './gradlew test'
+//            }
+//        }
 
         stage('Android Test') {
             steps {
