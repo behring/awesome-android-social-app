@@ -6,6 +6,7 @@ services:
     ports:
       - "8080:8080"
       - "50000:50000"
+      - "5000:5000"
     volumes:
       - ~/docker/volumes/jenkins-android/jenkins_home:/var/jenkins_home
     networks:

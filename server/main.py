@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 
 @app.route('/login', methods=['POST'])
-def login() -> 'json':
+def login():
     account_name = request.form.get('account_name')
     password = request.form.get('password')
     response = {}
