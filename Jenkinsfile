@@ -7,7 +7,7 @@ pipeline {
             steps {
                 sh './gradlew findbugs'
                 publishHTML target: [
-                        allowMissing: false,
+                        allowMissing: true,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
                         reportDir: 'app/build/reports/findbugs',
