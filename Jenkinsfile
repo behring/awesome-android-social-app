@@ -80,6 +80,7 @@ pipeline {
                             error "Pipeline aborted due to quality gate failure: ${qg.status}"
                         }
                     }
+                    currentBuild.description = "<a href=\"http://localhost:9000/projects?sort=-analysis_date\">SonarQube</a>"
                 }
             }
         }
@@ -95,7 +96,6 @@ pipeline {
                 archiveArtifacts artifacts: '**/*.apk', excludes: '**/*-unsigned.apk'
                 script {
                     currentBuild.displayName = "第${BUILD_NUMBER}次构建"
-                    currentBuild.description = "<a href=\"http://localhost:9000/projects?sort=-analysis_date\">SonarQube</a>"
                 }
             }
         }
