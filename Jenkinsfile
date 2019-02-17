@@ -5,42 +5,46 @@ pipeline {
 
         stage('findbugs') {
             steps {
-                try {
-                    sh './gradlew findbugs'
-                } catch (err) {
-                    currentBuild.result = 'FAILURE'
-                    error('findbugs error...')
-                    throw err
-                } finally {
-                    publishHTML target: [
-                            allowMissing: false,
-                            alwaysLinkToLastBuild: false,
-                            keepAll: true,
-                            reportDir: 'app/build/reports/findbugs',
-                            reportFiles: 'findbugs-output.html',
-                            reportName: 'FindBugs Report'
-                    ]
+                script {
+                    try {
+                        sh './gradlew findbugs'
+                    } catch (err) {
+                        currentBuild.result = 'FAILURE'
+                        error('findbugs error...')
+                        throw err
+                    } finally {
+                        publishHTML target: [
+                                allowMissing: false,
+                                alwaysLinkToLastBuild: false,
+                                keepAll: true,
+                                reportDir: 'app/build/reports/findbugs',
+                                reportFiles: 'findbugs-output.html',
+                                reportName: 'FindBugs Report'
+                        ]
+                    }
                 }
             }
         }
 
         stage('checkstyle') {
             steps {
-                try {
-                    sh './gradlew checkstyle'
-                } catch (err) {
-                    currentBuild.result = 'FAILURE'
-                    error('lint error...')
-                    throw err
-                } finally {
-                    publishHTML target: [
-                            allowMissing: false,
-                            alwaysLinkToLastBuild: false,
-                            keepAll: true,
-                            reportDir: 'app/build/reports/checkstyle',
-                            reportFiles: 'checkstyle.html',
-                            reportName: 'Checkstyle Report'
-                    ]
+                script {
+                    try {
+                        sh './gradlew checkstyle'
+                    } catch (err) {
+                        currentBuild.result = 'FAILURE'
+                        error('lint error...')
+                        throw err
+                    } finally {
+                        publishHTML target: [
+                                allowMissing: false,
+                                alwaysLinkToLastBuild: false,
+                                keepAll: true,
+                                reportDir: 'app/build/reports/checkstyle',
+                                reportFiles: 'checkstyle.html',
+                                reportName: 'Checkstyle Report'
+                        ]
+                    }
                 }
             }
         }
