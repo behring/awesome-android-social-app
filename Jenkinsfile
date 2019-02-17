@@ -3,6 +3,29 @@ pipeline {
 
     stages {
 
+        stage('pmd') {
+            steps {
+                script {
+                    try {
+                        sh './gradlew pmd'
+                    } catch (err) {
+                        currentBuild.result = 'FAILURE'
+                        error('pmd error...')
+                        throw err
+                    } finally {
+                        publishHTML target: [
+                                allowMissing: false,
+                                alwaysLinkToLastBuild: false,
+                                keepAll: true,
+                                reportDir: 'app/build/reports/pmd',
+                                reportFiles: 'pmd.html',
+                                reportName: 'PMD Report'
+                        ]
+                    }
+                }
+            }
+        }
+
         stage('findbugs') {
             steps {
                 script {

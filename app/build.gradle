@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
+apply plugin: 'pmd'
 
 android {
     compileSdkVersion 28
@@ -127,6 +128,16 @@ task findbugs(type: FindBugs, dependsOn: ['assemble']) {
     }
 }
 
+task pmd(type: Pmd) {
+    ruleSetFiles = files("$project.rootDir/config/pmd/rules-pmd.xml")
+    source = fileTree('src/main/java/')
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html.destination = "$project.buildDir/reports/pmd/pmd.html"
+    }
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
