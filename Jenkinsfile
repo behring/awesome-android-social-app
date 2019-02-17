@@ -22,10 +22,10 @@ pipeline {
                 script {
                     try {
                         sh './gradlew lintCi'
-                    } catch (err) {
                         androidLint()
+                    } catch (err) {
                         currentBuild.result = 'FAILURE'
-                        error('Lint found issues...')
+                        error('Lint error...')
                         throw err
                     }
                 }
