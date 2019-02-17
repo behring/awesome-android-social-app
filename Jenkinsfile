@@ -3,6 +3,12 @@ pipeline {
 
     stages {
 
+        stage('checkstyle') {
+            steps {
+                sh './gradlew checkstyle'
+            }
+        }
+
         stage('Lint') {
             steps {
                 script {
