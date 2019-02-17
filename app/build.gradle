@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
 apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
 
 android {
     compileSdkVersion 28
@@ -96,14 +97,33 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
 task checkstyle(type: Checkstyle) {
     description = "Check Java style with Checkstyle"
     configFile = rootProject.file("config/checkstyle/sun_checks.xml")
-    source ='src/main/java'
+    source = 'src/main/java'
     classpath = files()
     ignoreFailures = true
 
     reports {
         xml.enabled false
         html.enabled true
-        html.stylesheet resources.text.fromFile('../config/xsl/checkstyle-frames.xsl')
+        html.stylesheet resources.text.fromFile('../config/checkstyle/xsl/checkstyle-frames.xsl')
+    }
+}
+
+task findbugs(type: FindBugs, dependsOn: ['assemble']) {
+    ignoreFailures = false
+    effort = "max"
+    reportLevel = "low"
+    classes = files("$project.buildDir/intermediates/javac/debug")
+    excludeFilter = file("$rootProject.rootDir/config/findbugs/findbugs-exclude.xml")
+
+    source = fileTree('src/main/java/')
+    classpath = files()
+
+    reports {
+        xml.enabled = false
+        xml.withMessages = true
+        html.enabled = !xml.isEnabled()
+        xml.destination "$project.buildDir/reports/findbugs/findbugs-output.xml"
+        html.destination "$project.buildDir/reports/findbugs/findbugs-output.html"
     }
 }
 
