@@ -3,6 +3,20 @@ pipeline {
 
     stages {
 
+        stage('findbugs') {
+            steps {
+                sh './gradlew findbugs'
+                publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'app/build/reports/findbugs',
+                        reportFiles: 'findbugs-output.html',
+                        reportName: 'FindBugs Report'
+                ]
+            }
+        }
+
         stage('checkstyle') {
             steps {
                 sh './gradlew checkstyle'
