@@ -18,9 +18,9 @@ import com.thoughtworks.awesomesocialapp.main.MainActivity;
 import com.thoughtworks.awesomesocialapp.models.User;
 
 public class LoginFragment extends Fragment implements View.OnClickListener, LoginViewModel.OnLoginListener {
-    private LoginViewModel viewModel;
-    private EditText accountNameEditText;
-    private EditText passwordEditText;
+    private LoginViewModel viewModel = null;
+    private EditText accountNameEditText = null;
+    private EditText passwordEditText  = null;
     private ProgressDialog progressDialog;
 
     public static LoginFragment newInstance() {
