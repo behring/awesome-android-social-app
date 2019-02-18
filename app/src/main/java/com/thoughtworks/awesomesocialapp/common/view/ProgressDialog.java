@@ -25,7 +25,7 @@ public class ProgressDialog extends Dialog {
     }
 
     public static class Builder {
-        private Context context;
+        private final Context context;
         private CharSequence text;
 
         public Builder(Context context) {
