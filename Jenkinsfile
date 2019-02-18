@@ -94,16 +94,16 @@ pipeline {
             }
         }
 
-        stage('Run Server And Emulator') {
+        stage('Run Emulator') {
             steps {
-                sh 'cd server && env ENV=ci ./run.sh &'
-                sh 'cd ..'
                 sh 'adb connect jenkins'
             }
         }
 
         stage('Android Test') {
             steps {
+                sh 'cd server && env ENV=ci ./run.sh &'
+                sh 'cd ..'
                 sh './gradlew connectedCiAndroidTest'
                 sh 'kill $(lsof -t -i:5000)'
             }
