@@ -17,7 +17,8 @@ import com.thoughtworks.awesomesocialapp.common.view.ProgressDialog;
 import com.thoughtworks.awesomesocialapp.main.MainActivity;
 import com.thoughtworks.awesomesocialapp.models.User;
 
-public class LoginFragment extends Fragment implements View.OnClickListener, LoginViewModel.OnLoginListener {
+public class LoginFragment extends Fragment implements View.OnClickListener,
+        LoginViewModel.OnLoginListener {
     private LoginViewModel viewModel = null;
     private EditText accountNameEditText = null;
     private EditText passwordEditText  = null;
@@ -71,7 +72,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
 
     private void showProgressDialog() {
         if (progressDialog == null) {
-            progressDialog = new ProgressDialog.Builder(getActivity()).setText("Logging in...").create();
+            progressDialog = new ProgressDialog.Builder(getActivity())
+                    .setText("Logging in...")
+                    .create();
         }
         progressDialog.show();
     }

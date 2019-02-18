@@ -13,7 +13,8 @@ public final class ServerApi {
 
     }
 
-    public static ResponseResult<User> login(String accountName, String password) throws IOException {
+    public static ResponseResult<User> login(String accountName, String password)
+            throws IOException {
         LoginService loginService = RetrofitHelper.getRetrofit().create(LoginService.class);
         Call<ResponseResult<User>> call = loginService.login(accountName, password);
         return call.execute().body();

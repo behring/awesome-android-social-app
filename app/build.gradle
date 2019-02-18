@@ -97,10 +97,10 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
 
 task checkstyle(type: Checkstyle) {
     description = "Check Java style with Checkstyle"
-    configFile = rootProject.file("config/checkstyle/sun_checks.xml")
+    configFile = rootProject.file("config/checkstyle/google_checks.xml")
     source = 'src/main/java'
     classpath = files()
-    ignoreFailures = true
+    ignoreFailures = false
 
     reports {
         xml.enabled false
