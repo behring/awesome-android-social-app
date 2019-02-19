@@ -4,7 +4,28 @@ pipeline {
     stages {
         stage('init') {
             steps {
+                sh 'kill $(lsof -t -i:5000)'
                 sh './gradlew --stop && ./gradlew clean'
+            }
+        }
+
+        stage('SonarQube analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQube Server') {
+                        retry(3) {
+                            sh './gradlew sonarqube -Dsonar.host.url=http://jenkins:9000'
+                        }
+                    }
+
+                    timeout(time: 5, unit: 'MINUTES') {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                        }
+                    }
+                    currentBuild.description = "<a href=\"http://localhost:9000/projects?sort=-analysis_date\">SonarQube</a>"
+                }
             }
         }
 
@@ -110,27 +131,6 @@ pipeline {
                 retry(3) {
                     sh 'cd server && env ENV=ci ./run.sh &'
                     sh './gradlew connectedAndroidTest -PENV=ci'
-//                    sh 'kill $(lsof -t -i:5000)'
-                }
-            }
-        }
-
-        stage('SonarQube analysis') {
-            steps {
-                script {
-                    withSonarQubeEnv('SonarQube Server') {
-                        retry(3) {
-                            sh './gradlew sonarqube -Dsonar.host.url=http://jenkins:9000'
-                        }
-                    }
-
-                    timeout(time: 5, unit: 'MINUTES') {
-                        def qg = waitForQualityGate()
-                        if (qg.status != 'OK') {
-                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                        }
-                    }
-                    currentBuild.description = "<a href=\"http://localhost:9000/projects?sort=-analysis_date\">SonarQube</a>"
                 }
             }
         }
