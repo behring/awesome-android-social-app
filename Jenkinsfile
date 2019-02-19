@@ -102,10 +102,12 @@ pipeline {
 
         stage('Android Test') {
             steps {
-                sh 'cd server && env ENV=ci ./run.sh &'
-                sh 'cd ..'
-                sh './gradlew connectedAndroidTest -PENV=ci'
-                sh 'kill $(lsof -t -i:5000)'
+                retry(3) {
+                    sh 'cd server && env ENV=ci ./run.sh &'
+                    sh 'cd .. && ./gradlew clean'
+                    sh './gradlew connectedAndroidTest -PENV=ci'
+//                    sh 'kill $(lsof -t -i:5000)'
+                }
             }
         }
 
