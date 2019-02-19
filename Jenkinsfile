@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('init') {
             steps {
-                sh 'kill $(lsof -t -i:5000)'
                 sh './gradlew --stop && ./gradlew clean'
             }
         }
@@ -131,6 +130,7 @@ pipeline {
                 retry(3) {
                     sh 'cd server && env ENV=ci ./run.sh &'
                     sh './gradlew connectedAndroidTest -PENV=ci'
+//                    sh 'kill $(lsof -t -i:5000)'
                 }
             }
         }
