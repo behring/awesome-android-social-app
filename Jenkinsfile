@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage('init') {
+            steps {
+                sh './gradlew --stop && ./gradlew clean'
+            }
+        }
 
         stage('pmd') {
             steps {
@@ -104,7 +109,7 @@ pipeline {
             steps {
                 retry(3) {
                     sh 'cd server && env ENV=ci ./run.sh &'
-                    sh './gradlew clean connectedAndroidTest -PENV=ci'
+                    sh './gradlew connectedAndroidTest -PENV=ci'
 //                    sh 'kill $(lsof -t -i:5000)'
                 }
             }
