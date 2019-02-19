@@ -11,15 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.thoughtworks.awesomesocialapp.R;
 import com.thoughtworks.awesomesocialapp.common.view.ProgressDialog;
 import com.thoughtworks.awesomesocialapp.main.MainActivity;
 import com.thoughtworks.awesomesocialapp.models.User;
 
-public class LoginFragment extends Fragment implements View.OnClickListener, LoginViewModel.OnLoginListener {
-    private LoginViewModel viewModel;
-    private EditText accountNameEditText;
-    private EditText passwordEditText;
+public class LoginFragment extends Fragment implements View.OnClickListener,
+        LoginViewModel.OnLoginListener {
+    private LoginViewModel viewModel = null;
+    private EditText accountNameEditText = null;
+    private EditText passwordEditText  = null;
     private ProgressDialog progressDialog;
 
     public static LoginFragment newInstance() {
@@ -48,14 +50,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.login_button:
-                showProgressDialog();
-                viewModel.login(accountNameEditText.getText().toString(),
-                        passwordEditText.getText().toString(), this);
-                break;
-            default:
-                break;
+        int viewId = v.getId();
+        if (viewId == R.id.login_button) {
+            showProgressDialog();
+            viewModel.login(accountNameEditText.getText().toString(),
+                    passwordEditText.getText().toString(), this);
         }
     }
 
@@ -73,7 +72,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
 
     private void showProgressDialog() {
         if (progressDialog == null) {
-            progressDialog = new ProgressDialog.Builder(getActivity()).setText("Logging in...").create();
+            progressDialog = new ProgressDialog.Builder(getActivity())
+                    .setText("Logging in...")
+                    .create();
         }
         progressDialog.show();
     }

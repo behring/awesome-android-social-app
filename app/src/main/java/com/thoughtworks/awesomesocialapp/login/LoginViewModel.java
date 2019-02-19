@@ -26,19 +26,22 @@ public class LoginViewModel extends ViewModel {
     public void login(@NonNull final String accountName, @NonNull final String password,
                       @NonNull final OnLoginListener loginListener) {
         final CompositeDisposable compositeDisposable = new CompositeDisposable();
-        Disposable disposable = Observable.create((ObservableOnSubscribe<ResponseResult<User>>) emitter -> {
+        Disposable disposable = Observable.create((ObservableOnSubscribe<ResponseResult<User>>)
+                emitter -> {
+                    ResponseResult<User> responseResult = ServerApi.login(accountName, password);
+                    emitter.onNext(responseResult);
 
-            ResponseResult<User> responseResult = ServerApi.login(accountName, password);
-            emitter.onNext(responseResult);
-
-        }).subscribeOn(Schedulers.io())
+                }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(responseResult -> {
                     int responseCode = responseResult.getCode();
                     if (responseCode == NetworkConstants.Code.SUCCESS) {
                         loginListener.onLoginSuccess(responseResult.getData());
                     } else {
-                        loginListener.onLoginFailure(new LoginException(responseResult.getMessage(), responseResult.getCode(), null));
+                        loginListener.onLoginFailure(
+                                new LoginException(responseResult.getMessage(),
+                                        responseResult.getCode(),
+                                        null));
                     }
                 }, loginListener::onLoginFailure);
         compositeDisposable.add(disposable);

@@ -13,8 +13,6 @@ import com.thoughtworks.awesomesocialapp.R;
 
 public class MainFragment extends Fragment {
 
-    private MainViewModel mViewModel;
-
     public static MainFragment newInstance() {
         return new MainFragment();
     }
@@ -29,8 +27,8 @@ public class MainFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        // TODO: Use the ViewModel
+//        MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        // TODO(behring): Use the ViewModel
     }
 
 }

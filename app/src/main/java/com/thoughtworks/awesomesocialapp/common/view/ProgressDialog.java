@@ -15,7 +15,8 @@ public class ProgressDialog extends Dialog {
 
     public ProgressDialog(Context context, int themeResId) {
         super(context, themeResId);
-        binding = ProgressDialogBinding.bind(getLayoutInflater().inflate(R.layout.progress_dialog, null));
+        binding = ProgressDialogBinding.bind(getLayoutInflater().inflate(R.layout.progress_dialog,
+                null));
         setContentView(binding.getRoot());
     }
 
@@ -25,7 +26,7 @@ public class ProgressDialog extends Dialog {
     }
 
     public static class Builder {
-        private Context context;
+        private final Context context;
         private CharSequence text;
 
         public Builder(Context context) {

@@ -2,9 +2,7 @@ package com.thoughtworks.awesomesocialapp.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.thoughtworks.awesomesocialapp.R;
-import com.thoughtworks.awesomesocialapp.main.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
 
