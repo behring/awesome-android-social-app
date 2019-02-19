@@ -104,8 +104,7 @@ pipeline {
             steps {
                 retry(3) {
                     sh 'cd server && env ENV=ci ./run.sh &'
-                    sh 'cd .. && ./gradlew clean'
-                    sh './gradlew connectedAndroidTest -PENV=ci'
+                    sh './gradlew clean connectedAndroidTest -PENV=ci'
 //                    sh 'kill $(lsof -t -i:5000)'
                 }
             }
