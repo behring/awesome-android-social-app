@@ -44,7 +44,7 @@ android {
         }
     }
 
-    testBuildType "ci"
+    testBuildType project.hasProperty('ENV') ? ENV : "debug"
 
     testOptions {
         unitTests {
