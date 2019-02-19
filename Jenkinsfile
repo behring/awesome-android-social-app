@@ -114,7 +114,9 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube Server') {
-                        sh './gradlew sonarqube -Dsonar.host.url=http://jenkins:9000'
+                        retry(3) {
+                            sh './gradlew sonarqube -Dsonar.host.url=http://jenkins:9000'
+                        }
                     }
 
                     timeout(time: 5, unit: 'MINUTES') {
