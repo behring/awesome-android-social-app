@@ -11,6 +11,7 @@ cd ..
 
 # kill emulator
 kill $(lsof -t -i:5554)
+adb kill-server
 
 # kill python server
 kill $(lsof -t -i:5001)

@@ -17,6 +17,7 @@ pipeline {
         stage('Android Test') {
             steps {
                 retry(3) {
+                    sh 'adb adb kill-server'
                     sh 'adb connect jenkins'
                     sh 'cd server && env ENV=ci ./run.sh &'
                     sh './gradlew connectedAndroidTest -PENV=ci'
