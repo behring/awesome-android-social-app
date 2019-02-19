@@ -8,3 +8,4 @@
 .externalNativeBuild
 /server/__pycache__gst
 /server/__pycache__
+/sonarqube

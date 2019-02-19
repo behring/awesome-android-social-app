@@ -2,6 +2,30 @@ pipeline {
     agent any
 
     stages {
+        stage('init') {
+            steps {
+                sh './gradlew --stop && ./gradlew clean'
+            }
+        }
+
+        stage('Unit Test') {
+            steps {
+                sh './gradlew testCiUnitTest'
+            }
+        }
+
+        stage('Android Test') {
+            steps {
+                retry(3) {
+                    sh 'adb kill-server'
+                    sh 'adb connect jenkins'
+                    sh 'cd server && env ENV=ci ./run.sh &'
+                    sh './gradlew connectedAndroidTest -PENV=ci'
+                    sh 'kill $(lsof -t -i:5000)'
+                    sh 'adb disconnect jenkins'
+                }
+            }
+        }
 
         stage('pmd') {
             steps {
@@ -88,32 +112,13 @@ pipeline {
             }
         }
 
-        stage('Unit Test') {
-            steps {
-                sh './gradlew testCiUnitTest'
-            }
-        }
-
-        stage('Run Emulator') {
-            steps {
-                sh 'adb connect jenkins'
-            }
-        }
-
-        stage('Android Test') {
-            steps {
-                sh 'cd server && env ENV=ci ./run.sh &'
-                sh 'cd ..'
-                sh './gradlew connectedAndroidTest -PENV=ci'
-                sh 'kill $(lsof -t -i:5000)'
-            }
-        }
-
         stage('SonarQube analysis') {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube Server') {
-                        sh './gradlew sonarqube -Dsonar.host.url=http://jenkins:9000'
+                        retry(3) {
+                            sh './gradlew sonarqube -Dsonar.host.url=http://jenkins:9000'
+                        }
                     }
 
                     timeout(time: 5, unit: 'MINUTES') {

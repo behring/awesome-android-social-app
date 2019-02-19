@@ -7,18 +7,23 @@ import android.support.test.filters.SmallTest;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import com.thoughtworks.awesomesocialapp.R;
 import com.thoughtworks.awesomesocialapp.common.view.ProgressDialog;
 import com.thoughtworks.awesomesocialapp.main.MainActivity;
 import com.thoughtworks.awesomesocialapp.models.User;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowDialog;
 import org.robolectric.shadows.ShadowToast;
 import org.robolectric.shadows.support.v4.SupportFragmentController;
+
 import java.util.Objects;
+
 import androidx.test.core.app.ApplicationProvider;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import static org.robolectric.Shadows.shadowOf;
@@ -34,21 +39,21 @@ public class LoginFragmentTest {
     public void onCreateView_shouldDisplayAccountNameEditText() {
         View accountNameEditText = getRootView().findViewById(R.id.account_name_input);
         assertTrue(accountNameEditText instanceof EditText);
-        assertEquals(accountNameEditText.getVisibility(), View.VISIBLE);
+        assertEquals(View.VISIBLE, accountNameEditText.getVisibility());
     }
 
     @Test
     public void onCreateView_shouldDisplayPasswordEditText() {
         View accountNameEditText = getRootView().findViewById(R.id.password_input);
         assertTrue(accountNameEditText instanceof EditText);
-        assertEquals(accountNameEditText.getVisibility(), View.VISIBLE);
+        assertEquals(View.VISIBLE, accountNameEditText.getVisibility());
     }
 
     @Test
     public void onCreateView_shouldDisplayLoginButton() {
         View loginButton = getRootView().findViewById(R.id.login_button);
         assertTrue(loginButton instanceof Button);
-        assertEquals(loginButton.getVisibility(), View.VISIBLE);
+        assertEquals(View.VISIBLE, loginButton.getVisibility());
     }
 
     @Test
