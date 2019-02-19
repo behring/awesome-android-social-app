@@ -1,6 +1,5 @@
 package com.thoughtworks.awesomesocialapp.main;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,8 +26,6 @@ public class MainFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        // TODO(behring): Use the ViewModel
     }
 
 }
