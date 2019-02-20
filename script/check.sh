@@ -6,7 +6,7 @@ cd ../server && ./run.sh &
 cd ..
 
 ./gradlew --stop
-./gradlew sonarqube -Dsonar.host.url=http://localhost:9001
+./gradlew sonarqube -Dsonar.branch=master -Dsonar.host.url=http://localhost:9001
 ./gradlew clean pmd findbugs checkstyle lint testDebugUnitTest connectedAndroidTest
 
 # kill emulator
