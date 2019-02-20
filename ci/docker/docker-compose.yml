@@ -16,7 +16,7 @@ services:
   emulator:
     image: tracer0tong/android-emulator:latest
     ports:
-      - "5555:5555"
+      - "5555"
       - "80"
       - "22"
       - "443"
