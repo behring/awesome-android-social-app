@@ -1,4 +1,4 @@
-package com.thoughtworks.awesomesocialapp.main;
+package com.thoughtworks.awesomesocialapp.chats;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,17 +10,17 @@ import android.view.ViewGroup;
 
 import com.thoughtworks.awesomesocialapp.R;
 
-public class MainFragment extends Fragment {
+public class ChatsFragment extends Fragment {
 
-    public static MainFragment newInstance() {
-        return new MainFragment();
+    public static ChatsFragment newInstance() {
+        return new ChatsFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return inflater.inflate(R.layout.fragment_chats, container, false);
     }
 
     @Override

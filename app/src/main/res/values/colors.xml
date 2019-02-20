@@ -25,4 +25,5 @@
     <color name="red_coral">#ff5e3a</color>
     <color name="secondary_gradient">#374264</color>
     <color name="translucent_black">#c0000000</color>
+    <color name="grey_dark">#53627c</color>
 </resources>
