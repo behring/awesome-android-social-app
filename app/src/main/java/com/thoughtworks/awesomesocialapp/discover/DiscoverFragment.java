@@ -1,4 +1,4 @@
-package com.thoughtworks.discover;
+package com.thoughtworks.awesomesocialapp.discover;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
