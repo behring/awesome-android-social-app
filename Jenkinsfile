@@ -17,12 +17,10 @@ pipeline {
         stage('Android Test') {
             steps {
                 retry(3) {
-                    sh 'adb kill-server'
-                    sh 'adb connect jenkins'
+                    sh 'adb -s emulator-5554 connect jenkins'
                     sh 'cd server && env ENV=ci ./run.sh &'
                     sh './gradlew connectedAndroidTest -PENV=ci'
                     sh 'kill $(lsof -t -i:5000)'
-                    sh 'adb disconnect jenkins'
                 }
             }
         }
