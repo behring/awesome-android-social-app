@@ -15,15 +15,14 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao getUserDao();
 
     public static AppDatabase getInstance(Context context) {
-        if (instance == null) {
-            synchronized (AppDatabase.class) {
-                if (instance == null) {
-                    instance = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "Tasks.db")
-                            .build();
-                }
+        synchronized (AppDatabase.class) {
+            if (instance == null) {
+                instance = Room.databaseBuilder(context.getApplicationContext(),
+                        AppDatabase.class, "Tasks.db")
+                        .build();
+
             }
+            return instance;
         }
-        return instance;
     }
 }

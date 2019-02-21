@@ -6,8 +6,8 @@ import com.thoughtworks.awesomesocialapp.network.ServerApiInterface;
 
 import java.util.List;
 
-public class Repository {
-    private static volatile Repository instance = null;
+public final class Repository {
+    private static Repository instance = null;
 
     private final ServerApiInterface api;
 
@@ -19,13 +19,16 @@ public class Repository {
     }
 
     public static Repository getInstance(ServerApiInterface api, AppDatabase database) {
-        if (instance == null) {
-            instance = new Repository(api, database);
+        synchronized (Repository.class) {
+            if (instance == null) {
+                instance = new Repository(api, database);
+            }
+            return instance;
         }
-        return instance;
     }
 
     public List<ChatsItem> getChatsItem() {
+        database.getUserDao().getUserByToken("1231");
         return api.getChatsItems().getData();
     }
 }

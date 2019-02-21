@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class DateFormatUtils {
+public final class DateFormatUtils {
     private static final String DEFAULT_DATE_FORMAT = "yyyy-mm-dd hh:mm:ss";
 
     private DateFormatUtils() {

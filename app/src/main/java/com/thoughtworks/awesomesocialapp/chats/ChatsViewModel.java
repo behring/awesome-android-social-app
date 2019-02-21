@@ -10,7 +10,7 @@ import com.thoughtworks.awesomesocialapp.data.Repository;
 import java.util.List;
 
 public class ChatsViewModel extends AndroidViewModel {
-    private Repository repository;
+    private final Repository repository;
 
     public ChatsViewModel(@NonNull Application application, Repository repository) {
         super(application);

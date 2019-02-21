@@ -8,7 +8,10 @@ import com.thoughtworks.awesomesocialapp.utils.DateFormatUtils;
 
 import java.util.Date;
 
-public class TextViewDataBindingAdapter {
+public final class TextViewDataBindingAdapter {
+    private TextViewDataBindingAdapter() {
+    }
+
     @BindingAdapter(value = {"android:date", "android:dateFormat"}, requireAll = false)
     public static void setDate(TextView textView, Date date, String dateFormat) {
         String dateStr;

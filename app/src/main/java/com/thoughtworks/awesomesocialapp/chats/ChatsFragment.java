@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatsFragment extends Fragment {
-
-    private List<ChatsItem> data = new ArrayList<>();
     private FragmentChatsBinding binding;
     private ChatsViewModel viewModel;
     private ChatsRecyclerViewAdapter adapter;
@@ -38,7 +36,7 @@ public class ChatsFragment extends Fragment {
 
     private void initUI() {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new ChatsRecyclerViewAdapter(data);
+        adapter = new ChatsRecyclerViewAdapter();
         binding.recyclerView.setAdapter(adapter);
     }
 

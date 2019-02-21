@@ -6,16 +6,16 @@ import android.arch.persistence.room.Entity;
 import com.google.gson.annotations.SerializedName;
 @Entity
 public class User extends Table {
-    public User(String accountName, String token) {
-        this.accountName = accountName;
-        this.token = token;
-    }
-
     @ColumnInfo(name = "account_name")
     @SerializedName("account_name")
     private String accountName;
 
     private String token;
+
+    public User(String accountName, String token) {
+        this.accountName = accountName;
+        this.token = token;
+    }
 
     public String getAccountName() {
         return accountName;

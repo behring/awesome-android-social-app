@@ -4,14 +4,14 @@ import com.thoughtworks.awesomesocialapp.R;
 import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
 import com.thoughtworks.awesomesocialapp.common.SingleLayoutRecyclerViewAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatsRecyclerViewAdapter extends SingleLayoutRecyclerViewAdapter {
-    private List<ChatsItem> data;
+    private List<ChatsItem> data = new ArrayList<>();
 
-    ChatsRecyclerViewAdapter(List<ChatsItem> data) {
+    ChatsRecyclerViewAdapter() {
         super(R.layout.item_chats);
-        this.data = data;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class ChatsRecyclerViewAdapter extends SingleLayoutRecyclerViewAdapter {
         return data.size();
     }
 
-    public void updateData(List<ChatsItem> data) {
+    void updateData(List<ChatsItem> data) {
         this.data = data;
         notifyDataSetChanged();
     }

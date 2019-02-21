@@ -5,7 +5,10 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
-public class ImageViewDataBindingAdapter {
+public final class ImageViewDataBindingAdapter {
+    private ImageViewDataBindingAdapter() {
+    }
+
     @BindingAdapter(value = {"android:imageUrl", "android:placeholder"}, requireAll = false)
     public static void setImageUrl(ImageView imageView, String url, Drawable placeholder) {
         if (TextUtils.isEmpty(url)) {

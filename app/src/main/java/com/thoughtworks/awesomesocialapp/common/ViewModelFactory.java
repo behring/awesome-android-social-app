@@ -9,8 +9,8 @@ import com.thoughtworks.awesomesocialapp.chats.ChatsViewModel;
 import com.thoughtworks.awesomesocialapp.data.Repository;
 import com.thoughtworks.awesomesocialapp.login.LoginViewModel;
 
-public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
-    private static volatile ViewModelFactory instance;
+public final class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
+    private static ViewModelFactory instance;
     private final Application application;
     private Repository repository;
 
@@ -19,15 +19,13 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     }
 
     public static ViewModelFactory getInstance(Application application) {
-        if (instance == null) {
-            synchronized (ViewModelFactory.class) {
-                if (instance == null) {
-                    instance = new ViewModelFactory(application);
-                }
+        synchronized (ViewModelFactory.class) {
+            if (instance == null) {
+                instance = new ViewModelFactory(application);
             }
+            instance.repository = DataInjection.provideRepository(application);
+            return instance;
         }
-        instance.repository = DataInjection.provideRepository(application);
-        return instance;
     }
 
     @SuppressWarnings("unchecked")
