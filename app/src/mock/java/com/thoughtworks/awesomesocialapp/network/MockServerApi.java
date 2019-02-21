@@ -41,7 +41,7 @@ public final class MockServerApi implements ServerApiInterface {
         List<ChatsItem> data = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
             ChatsItem item = new ChatsItem();
-            item.setAvatarUrl("ddd");
+            item.setAvatarUrl("");
             item.setName("behring" + i);
             item.setNewMessage("this is a new message " + i);
             item.setNewMessageCount(i + 1);

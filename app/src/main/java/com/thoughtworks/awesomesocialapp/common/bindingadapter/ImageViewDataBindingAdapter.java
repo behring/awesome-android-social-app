@@ -14,7 +14,7 @@ public final class ImageViewDataBindingAdapter {
         if (TextUtils.isEmpty(url)) {
             imageView.setImageDrawable(placeholder);
         } else {
-            imageView.setImageDrawable(placeholder);
+
         }
     }
 }

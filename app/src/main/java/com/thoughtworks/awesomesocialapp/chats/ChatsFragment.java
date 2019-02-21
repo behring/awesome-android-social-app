@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatsFragment extends Fragment {
-    private FragmentChatsBinding binding;
+    private FragmentChatsBinding binding = null;
     private ChatsViewModel viewModel;
     private ChatsRecyclerViewAdapter adapter;
 
