@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.navbar_contacts_normal),
                         getResources().getColor(android.R.color.transparent))
-                        .selectedIcon(getResources().getDrawable(R.drawable.navbar_contacts_selected))
+                        .selectedIcon(getResources()
+                                .getDrawable(R.drawable.navbar_contacts_selected))
                         .title("Contacts")
                         .build()
         );
@@ -56,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.navbar_discover_normal),
                         getResources().getColor(android.R.color.transparent))
-                        .selectedIcon(getResources().getDrawable(R.drawable.navbar_discover_selected))
+                        .selectedIcon(getResources()
+                                .getDrawable(R.drawable.navbar_discover_selected))
                         .title("Discover")
                         .build()
         );
