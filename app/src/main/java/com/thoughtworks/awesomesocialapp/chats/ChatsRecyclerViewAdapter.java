@@ -9,7 +9,7 @@ import java.util.List;
 public class ChatsRecyclerViewAdapter extends SingleLayoutRecyclerViewAdapter {
     private List<ChatsItem> data;
 
-    public ChatsRecyclerViewAdapter(List<ChatsItem> data) {
+    ChatsRecyclerViewAdapter(List<ChatsItem> data) {
         super(R.layout.item_chats);
         this.data = data;
     }
@@ -22,5 +22,10 @@ public class ChatsRecyclerViewAdapter extends SingleLayoutRecyclerViewAdapter {
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void updateData(List<ChatsItem> data) {
+        this.data = data;
+        notifyDataSetChanged();
     }
 }

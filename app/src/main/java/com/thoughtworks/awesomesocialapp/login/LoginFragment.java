@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.thoughtworks.awesomesocialapp.R;
+import com.thoughtworks.awesomesocialapp.common.ViewModelFactory;
 import com.thoughtworks.awesomesocialapp.common.view.ProgressDialog;
 import com.thoughtworks.awesomesocialapp.main.MainActivity;
 import com.thoughtworks.awesomesocialapp.models.User;
@@ -45,7 +46,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setViewModel(ViewModelProviders.of(this).get(LoginViewModel.class));
+        if (getActivity() != null) {
+            ViewModelFactory factory = ViewModelFactory.getInstance(getActivity().getApplication());
+            setViewModel(ViewModelProviders.of(this, factory).get(LoginViewModel.class));
+        }
     }
 
     @Override

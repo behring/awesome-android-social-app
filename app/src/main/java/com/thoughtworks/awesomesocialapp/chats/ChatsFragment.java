@@ -1,5 +1,6 @@
 package com.thoughtworks.awesomesocialapp.chats;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,20 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
-import com.thoughtworks.awesomesocialapp.common.BaseRecyclerViewAdapter;
+import com.thoughtworks.awesomesocialapp.common.ViewModelFactory;
 import com.thoughtworks.awesomesocialapp.databinding.FragmentChatsBinding;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ChatsFragment extends Fragment {
 
+    private List<ChatsItem> data = new ArrayList<>();
+    private FragmentChatsBinding binding;
+    private ChatsViewModel viewModel;
+    private ChatsRecyclerViewAdapter adapter;
+
     public static ChatsFragment newInstance() {
         return new ChatsFragment();
     }
-
-    private FragmentChatsBinding binding;
 
     @Nullable
     @Override
@@ -36,25 +38,17 @@ public class ChatsFragment extends Fragment {
 
     private void initUI() {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.recyclerView.setAdapter(new ChatsRecyclerViewAdapter(mockData()));
+        adapter = new ChatsRecyclerViewAdapter(data);
+        binding.recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-    }
-
-    private List<ChatsItem> mockData() {
-        List<ChatsItem> data = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            ChatsItem item = new ChatsItem();
-            item.setAvatarUrl("ddd");
-            item.setName("behring" + i);
-            item.setNewMessage("this is a new message " + i);
-            item.setNewMessageCount(i + 1);
-            item.setTime(new Date());
-            data.add(item);
+        if (getActivity() != null) {
+            ViewModelFactory factory = ViewModelFactory.getInstance(getActivity().getApplication());
+            viewModel = ViewModelProviders.of(this, factory).get(ChatsViewModel.class);
         }
-        return data;
+        adapter.updateData(viewModel.getData());
     }
 }

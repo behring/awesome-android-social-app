@@ -1,11 +1,15 @@
 package com.thoughtworks.awesomesocialapp.login;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.ViewModel;
 
 import com.thoughtworks.awesomesocialapp.constants.NetworkConstants;
+import com.thoughtworks.awesomesocialapp.data.Repository;
 import com.thoughtworks.awesomesocialapp.exceptions.LoginException;
 import com.thoughtworks.awesomesocialapp.models.User;
 import com.thoughtworks.awesomesocialapp.network.ServerApi;
+import com.thoughtworks.awesomesocialapp.network.ServerApiInterface;
 import com.thoughtworks.awesomesocialapp.network.models.ResponseResult;
 
 import io.reactivex.Observable;
@@ -16,7 +20,12 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends AndroidViewModel {
+
+    public LoginViewModel(Application application) {
+        super(application);
+    }
+
     public interface OnLoginListener {
         void onLoginSuccess(User user);
 
@@ -28,7 +37,7 @@ public class LoginViewModel extends ViewModel {
         final CompositeDisposable compositeDisposable = new CompositeDisposable();
         Disposable disposable = Observable.create((ObservableOnSubscribe<ResponseResult<User>>)
                 emitter -> {
-                    ResponseResult<User> responseResult = ServerApi.login(accountName, password);
+                    ResponseResult<User> responseResult = ServerApi.getInstance().login(accountName, password);
                     emitter.onNext(responseResult);
 
                 }).subscribeOn(Schedulers.io())

@@ -8,7 +8,7 @@ import android.content.Context;
 import com.thoughtworks.awesomesocialapp.data.local.dao.UserDao;
 import com.thoughtworks.awesomesocialapp.models.User;
 
-@Database(entities = {User.class}, version = 1)
+@Database(entities = {User.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
 

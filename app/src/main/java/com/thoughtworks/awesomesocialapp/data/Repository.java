@@ -1,7 +1,10 @@
 package com.thoughtworks.awesomesocialapp.data;
 
+import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
 import com.thoughtworks.awesomesocialapp.data.local.AppDatabase;
 import com.thoughtworks.awesomesocialapp.network.ServerApiInterface;
+
+import java.util.List;
 
 public class Repository {
     private static volatile Repository instance = null;
@@ -20,5 +23,9 @@ public class Repository {
             instance = new Repository(api, database);
         }
         return instance;
+    }
+
+    public List<ChatsItem> getChatsItem() {
+        return api.getChatsItems().getData();
     }
 }
