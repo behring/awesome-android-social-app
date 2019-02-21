@@ -105,7 +105,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
                       '**/com/thoughtworks/awesomesocialapp/databinding/*',
                       '**/com/thoughtworks/awesomesocialapp/DataBindingInfo.*']
     def mainSrc = "${project.projectDir}/src/main/java"
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug", excludes: fileFilter)
+    def debugTree = fileTree(dir: "${buildDir}/intermediates/javac", excludes: fileFilter)
 
     sourceDirectories = files([mainSrc])
     classDirectories = files([debugTree])
@@ -134,7 +134,7 @@ task findbugs(type: FindBugs, dependsOn: ['assemble']) {
     ignoreFailures = false
     effort = "max"
     reportLevel = "low"
-    classes = files("$project.buildDir/intermediates/javac/debug")
+    classes = files("$project.buildDir/intermediates/javac")
     excludeFilter = file("$rootProject.rootDir/config/findbugs/findbugs-exclude.xml")
 
     source = fileTree('src/main/java/')
