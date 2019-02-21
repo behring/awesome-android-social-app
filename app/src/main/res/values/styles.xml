@@ -27,7 +27,22 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/sp14</item>
+    </style>
 
+    <style name="TextStyle.Black.Bold" parent="TextStyle.Black">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextStyle.Black.Bold.Large" parent="TextStyle.Black.Bold">
+        <item name="android:textSize">@dimen/sp16</item>
+    </style>
+
+    <style name="TextStyle.Black" parent="TextStyle">
+        <item name="android:textColor">@color/charcoal_dark</item>
+    </style>
+
+    <style name="TextStyle.Gray" parent="TextStyle">
+        <item name="android:textColor">@color/charcoal_light</item>
     </style>
 
     <style name="ProgressDialogWindowStyle">
@@ -48,4 +63,31 @@
         <item name="android:padding">20dp</item>
         <item name="android:background">@drawable/bg_translucent_corner_rectangle</item>
     </style>
+
+    <style name="AvatarImageViewStyle">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+    <style name="ListItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="RedPointStyle.Number" parent="RedPointStyle">
+        <item name="android:textSize">@dimen/sp10</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+    </style>
+
+    <style name="RedPointStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">18dp</item>
+        <item name="android:minWidth">18dp</item>
+        <item name="android:background">@drawable/bg_red_circle</item>
+    </style>
+
 </resources>

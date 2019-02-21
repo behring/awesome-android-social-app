@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.thoughtworks.awesomesocialapp.chats.models.ChatsItem" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout style="@style/ListItemStyle">
+
+        <ImageView
+            android:id="@+id/avatar"
+            style="@style/AvatarImageViewStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_avatar"
+            android:imageUrl="@{item.avatarUrl}"
+            android:placeholder="@{@drawable/ic_avatar}"/>
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/TextStyle.Black.Bold.Large"
+            android:layout_marginStart="@dimen/dp16"
+            app:layout_constraintLeft_toRightOf="@id/avatar"
+            app:layout_constraintTop_toTopOf="@id/avatar"
+            android:text="@{item.name}"
+            tools:text="Kendasha Wood" />
+
+        <TextView
+            style="@style/TextStyle.Gray"
+            android:id="@+id/time"
+            android:layout_marginStart="@dimen/dp16"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/name"
+            android:date="@{item.time}"
+            android:dateFormat="@{@string/chats_item_date_format}"
+            tools:text="10:20" />
+
+        <TextView
+            style="@style/TextStyle.Gray"
+            android:id="@+id/new_message"
+            android:layout_marginStart="@dimen/dp16"
+            app:layout_constraintBottom_toBottomOf="@id/avatar"
+            app:layout_constraintLeft_toRightOf="@id/avatar"
+            android:text="@{item.newMessage}"
+            tools:text="this is a new message" />
+
+        <TextView
+            android:id="@+id/new_message_count"
+            style="@style/RedPointStyle.Number"
+            android:layout_marginStart="@dimen/dp16"
+            app:layout_constraintBottom_toBottomOf="@id/avatar"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="@{item.newMessageCount}"
+            tools:text="2" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
+
+
