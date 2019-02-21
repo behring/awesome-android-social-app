@@ -1,8 +1,17 @@
 package com.thoughtworks.awesomesocialapp.models;
 
-import com.google.gson.annotations.SerializedName;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
 
-public class User {
+import com.google.gson.annotations.SerializedName;
+@Entity
+public class User extends Table {
+    public User(String accountName, String token) {
+        this.accountName = accountName;
+        this.token = token;
+    }
+
+    @ColumnInfo(name = "account_name")
     @SerializedName("account_name")
     private String accountName;
 

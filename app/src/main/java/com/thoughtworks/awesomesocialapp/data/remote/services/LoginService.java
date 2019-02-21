@@ -1,4 +1,4 @@
-package com.thoughtworks.awesomesocialapp.network.services;
+package com.thoughtworks.awesomesocialapp.data.remote.services;
 
 import com.thoughtworks.awesomesocialapp.models.User;
 import com.thoughtworks.awesomesocialapp.network.models.ResponseResult;
