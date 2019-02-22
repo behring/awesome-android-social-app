@@ -4,10 +4,10 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
 import com.thoughtworks.awesomesocialapp.data.Repository;
-
-import java.util.List;
 
 public class ChatsViewModel extends AndroidViewModel {
     private final Repository repository;

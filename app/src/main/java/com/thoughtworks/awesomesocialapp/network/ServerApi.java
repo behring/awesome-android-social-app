@@ -1,12 +1,12 @@
 package com.thoughtworks.awesomesocialapp.network;
 
-import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
-import com.thoughtworks.awesomesocialapp.models.User;
-import com.thoughtworks.awesomesocialapp.network.models.ResponseResult;
-import com.thoughtworks.awesomesocialapp.data.remote.services.LoginService;
-
 import java.io.IOException;
 import java.util.List;
+
+import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
+import com.thoughtworks.awesomesocialapp.data.remote.services.LoginService;
+import com.thoughtworks.awesomesocialapp.models.User;
+import com.thoughtworks.awesomesocialapp.network.models.ResponseResult;
 
 import retrofit2.Call;
 import timber.log.Timber;

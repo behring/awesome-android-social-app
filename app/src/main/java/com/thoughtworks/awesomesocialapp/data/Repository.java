@@ -1,10 +1,10 @@
 package com.thoughtworks.awesomesocialapp.data;
 
+import java.util.List;
+
 import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
 import com.thoughtworks.awesomesocialapp.data.local.AppDatabase;
 import com.thoughtworks.awesomesocialapp.network.ServerApiInterface;
-
-import java.util.List;
 
 public final class Repository {
     private static Repository instance = null;

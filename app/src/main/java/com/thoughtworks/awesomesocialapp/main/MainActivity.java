@@ -1,16 +1,16 @@
 package com.thoughtworks.awesomesocialapp.main;
 
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
+import java.util.ArrayList;
 
 import com.thoughtworks.awesomesocialapp.R;
 import com.thoughtworks.awesomesocialapp.chats.ChatsFragment;
 import com.thoughtworks.awesomesocialapp.contacts.ContactsFragment;
-import com.thoughtworks.awesomesocialapp.me.MeFragment;
 import com.thoughtworks.awesomesocialapp.discover.DiscoverFragment;
-
-import java.util.ArrayList;
+import com.thoughtworks.awesomesocialapp.me.MeFragment;
 
 import devlight.io.library.ntb.NavigationTabBar;
 

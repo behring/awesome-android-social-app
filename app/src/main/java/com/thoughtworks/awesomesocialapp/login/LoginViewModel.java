@@ -37,7 +37,8 @@ public class LoginViewModel extends AndroidViewModel {
         final CompositeDisposable compositeDisposable = new CompositeDisposable();
         Disposable disposable = Observable.create((ObservableOnSubscribe<ResponseResult<User>>)
                 emitter -> {
-                    ResponseResult<User> responseResult = ServerApi.getInstance().login(accountName, password);
+                    ResponseResult<User> responseResult = ServerApi.getInstance()
+                            .login(accountName, password);
                     emitter.onNext(responseResult);
 
                 }).subscribeOn(Schedulers.io())

@@ -1,7 +1,7 @@
 package com.thoughtworks.awesomesocialapp.login;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.thoughtworks.awesomesocialapp.R;
 

@@ -4,9 +4,9 @@ import android.databinding.BindingAdapter;
 import android.text.TextUtils;
 import android.widget.TextView;
 
-import com.thoughtworks.awesomesocialapp.utils.DateFormatUtils;
-
 import java.util.Date;
+
+import com.thoughtworks.awesomesocialapp.utils.DateFormatUtils;
 
 public final class TextViewDataBindingAdapter {
     private TextViewDataBindingAdapter() {
