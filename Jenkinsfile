@@ -10,7 +10,7 @@ pipeline {
 
         stage('Unit Test') {
             steps {
-                sh './gradlew testProdCiUnitTest'
+                sh './gradlew testMockCiUnitTest'
             }
         }
 
@@ -100,7 +100,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh './gradlew lintProdCi'
+                        sh './gradlew lintMockCi'
                     } catch (err) {
                         currentBuild.result = 'FAILURE'
                         error('lint error...')
