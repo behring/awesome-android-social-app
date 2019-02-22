@@ -132,8 +132,8 @@ task checkstyle(type: Checkstyle) {
 
 task findbugs(type: FindBugs, dependsOn: ['assemble']) {
     ignoreFailures = false
-    effort = "max"
-    reportLevel = "low"
+    effort = "max" // default max
+    reportLevel = "low"//low medium high
     classes = files("$project.buildDir/intermediates/javac")
     excludeFilter = file("$rootProject.rootDir/config/findbugs/findbugs-exclude.xml")
 

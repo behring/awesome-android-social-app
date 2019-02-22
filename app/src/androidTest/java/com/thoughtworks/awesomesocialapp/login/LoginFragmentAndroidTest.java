@@ -17,7 +17,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.*;
 
 @RunWith(AndroidJUnit4.class)
 @MediumTest
-public class LoginFragmentTest {
+public class LoginFragmentAndroidTest {
     private static final String DEFAULT_ACCOUNT_NAME = "behring";
     private static final String DEFAULT_PASSWORD = "111111";
 
