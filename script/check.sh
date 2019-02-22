@@ -8,7 +8,7 @@ cd ..
 ./gradlew --stop
 #./gradlew clean pmd findbugs checkstyle lintProdDebug testProdDebugUnitTest connectedProdDebugAndroidTest
 ./gradlew clean pmd findbugs checkstyle lintMockDebug testMockDebugUnitTest connectedMockDebugAndroidTest
-./gradlew sonarqube -Dsonar.branch=chatsfragment -Dsonar.host.url=http://localhost:9001
+./gradlew sonarqube -Dsonar.branch=master -Dsonar.host.url=http://localhost:9001
 
 # kill emulator
 kill $(lsof -t -i:5554)
