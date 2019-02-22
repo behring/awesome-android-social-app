@@ -28,7 +28,7 @@ public final class Repository {
     }
 
     public List<ChatsItem> getChatsItem() {
-        database.getUserDao().getUserByToken("1231");
+        database.getUserDao();
         return api.getChatsItems().getData();
     }
 }

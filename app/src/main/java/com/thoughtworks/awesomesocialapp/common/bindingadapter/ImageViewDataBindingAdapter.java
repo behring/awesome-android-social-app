@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 public final class ImageViewDataBindingAdapter {
     private ImageViewDataBindingAdapter() {
     }
@@ -14,7 +16,11 @@ public final class ImageViewDataBindingAdapter {
         if (TextUtils.isEmpty(url)) {
             imageView.setImageDrawable(placeholder);
         } else {
-
+            Glide.with(imageView.getContext())
+                    .load(url)
+                    .placeholder(placeholder)
+                    .circleCrop()
+                    .into(imageView);
         }
     }
 }
