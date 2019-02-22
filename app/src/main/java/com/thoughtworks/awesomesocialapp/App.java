@@ -1,7 +1,6 @@
 package com.thoughtworks.awesomesocialapp;
 
 import android.app.Application;
-
 import timber.log.Timber;
 
 public class App extends Application {

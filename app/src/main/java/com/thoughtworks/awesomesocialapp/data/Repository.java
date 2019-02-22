@@ -1,7 +1,6 @@
 package com.thoughtworks.awesomesocialapp.data;
 
 import java.util.List;
-
 import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
 import com.thoughtworks.awesomesocialapp.data.local.AppDatabase;
 import com.thoughtworks.awesomesocialapp.network.ServerApiInterface;

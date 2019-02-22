@@ -2,16 +2,11 @@ package com.thoughtworks.awesomesocialapp.login;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.ViewModel;
-
 import com.thoughtworks.awesomesocialapp.constants.NetworkConstants;
-import com.thoughtworks.awesomesocialapp.data.Repository;
 import com.thoughtworks.awesomesocialapp.exceptions.LoginException;
 import com.thoughtworks.awesomesocialapp.models.User;
 import com.thoughtworks.awesomesocialapp.network.ServerApi;
-import com.thoughtworks.awesomesocialapp.network.ServerApiInterface;
 import com.thoughtworks.awesomesocialapp.network.models.ResponseResult;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;

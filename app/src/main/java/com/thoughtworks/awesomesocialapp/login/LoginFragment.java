@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.thoughtworks.awesomesocialapp.R;
 import com.thoughtworks.awesomesocialapp.common.ViewModelFactory;
 import com.thoughtworks.awesomesocialapp.common.view.ProgressDialog;

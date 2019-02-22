@@ -4,7 +4,6 @@ import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 
 public final class ImageViewDataBindingAdapter {

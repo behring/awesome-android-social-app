@@ -3,9 +3,7 @@ package com.thoughtworks.awesomesocialapp.common.bindingadapter;
 import android.databinding.BindingAdapter;
 import android.text.TextUtils;
 import android.widget.TextView;
-
 import java.util.Date;
-
 import com.thoughtworks.awesomesocialapp.utils.DateFormatUtils;
 
 public final class TextViewDataBindingAdapter {

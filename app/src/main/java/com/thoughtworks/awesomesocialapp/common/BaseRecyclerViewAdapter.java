@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import com.thoughtworks.awesomesocialapp.BR;
 
 public abstract class BaseRecyclerViewAdapter extends

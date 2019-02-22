@@ -2,7 +2,6 @@ package com.thoughtworks.awesomesocialapp.chats;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.thoughtworks.awesomesocialapp.R;
 import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
 import com.thoughtworks.awesomesocialapp.common.SingleLayoutRecyclerViewAdapter;

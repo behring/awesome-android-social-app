@@ -2,7 +2,6 @@ package com.thoughtworks.awesomesocialapp.data.remote.services;
 
 import com.thoughtworks.awesomesocialapp.models.User;
 import com.thoughtworks.awesomesocialapp.network.models.ResponseResult;
-
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
