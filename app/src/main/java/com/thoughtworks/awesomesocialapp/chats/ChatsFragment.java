@@ -9,12 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
 import com.thoughtworks.awesomesocialapp.common.ViewModelFactory;
 import com.thoughtworks.awesomesocialapp.databinding.FragmentChatsBinding;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ChatsFragment extends Fragment {
     private FragmentChatsBinding binding = null;
