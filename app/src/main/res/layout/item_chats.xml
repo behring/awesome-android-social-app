@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.thoughtworks.awesomesocialapp.chats.models.ChatsItem" />
+            type="com.thoughtworks.awesomesocialapp.chats.models.ChatItem" />
     </data>
 
     <android.support.constraint.ConstraintLayout style="@style/ListItemStyle">

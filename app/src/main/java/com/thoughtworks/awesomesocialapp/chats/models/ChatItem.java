@@ -8,7 +8,7 @@ import com.thoughtworks.awesomesocialapp.models.Table;
 
 
 @Entity(tableName = "chat_item")
-public class ChatsItem extends Table {
+public class ChatItem extends Table {
     @ColumnInfo(name = "avatar_url")
     @SerializedName("avatar_url")
     private String avatarUrl;

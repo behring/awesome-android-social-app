@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import java.util.List;
-import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
+import com.thoughtworks.awesomesocialapp.chats.models.ChatItem;
 import com.thoughtworks.awesomesocialapp.common.ViewModelFactory;
 import com.thoughtworks.awesomesocialapp.data.FetchDataCallback;
 import com.thoughtworks.awesomesocialapp.databinding.FragmentChatsBinding;
@@ -47,9 +47,9 @@ public class ChatsFragment extends Fragment {
             ViewModelFactory factory = ViewModelFactory.getInstance(getActivity().getApplication());
             viewModel = ViewModelProviders.of(this, factory).get(ChatsViewModel.class);
         }
-        viewModel.getData(new FetchDataCallback<List<ChatsItem>>() {
+        viewModel.getData(new FetchDataCallback<List<ChatItem>>() {
             @Override
-            public void onFetchDataSuccess(List<ChatsItem> data) {
+            public void onFetchDataSuccess(List<ChatItem> data) {
                 adapter.updateData(data);
             }
 

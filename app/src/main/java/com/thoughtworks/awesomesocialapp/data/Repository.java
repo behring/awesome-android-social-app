@@ -1,7 +1,7 @@
 package com.thoughtworks.awesomesocialapp.data;
 
 import java.util.List;
-import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
+import com.thoughtworks.awesomesocialapp.chats.models.ChatItem;
 import com.thoughtworks.awesomesocialapp.constants.LocalCode;
 import com.thoughtworks.awesomesocialapp.data.local.AppDatabase;
 import com.thoughtworks.awesomesocialapp.network.ServerApiInterface;
@@ -32,14 +32,14 @@ public final class Repository {
         return api;
     }
 
-    public ResponseResult<List<ChatsItem>> getChatsItem() {
-        ResponseResult<List<ChatsItem>> responseResult = new ResponseResult<>();
-        List<ChatsItem> chatItems = database.getChatItemDao().getChatItems();
+    public ResponseResult<List<ChatItem>> getChatItems() {
+        ResponseResult<List<ChatItem>> responseResult = new ResponseResult<>();
+        List<ChatItem> chatItems = database.getChatItemDao().getChatItems();
         if (chatItems != null && !chatItems.isEmpty()) {
             responseResult.setData(chatItems);
             responseResult.setCode(LocalCode.QUERY_SUCCESS);
         } else {
-            responseResult = api.getChatsItems();
+            responseResult = api.getChatItems();
         }
         return responseResult;
     }

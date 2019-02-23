@@ -4,7 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
 import java.util.List;
-import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
+import com.thoughtworks.awesomesocialapp.chats.models.ChatItem;
 import com.thoughtworks.awesomesocialapp.constants.ServerCode;
 import com.thoughtworks.awesomesocialapp.data.FetchDataCallback;
 import com.thoughtworks.awesomesocialapp.data.Repository;
@@ -24,11 +24,11 @@ public class ChatsViewModel extends AndroidViewModel {
         this.repository = repository;
     }
 
-    void getData(FetchDataCallback<List<ChatsItem>> fetchDataCallback) {
+    void getData(FetchDataCallback<List<ChatItem>> fetchDataCallback) {
         final CompositeDisposable compositeDisposable = new CompositeDisposable();
         Disposable disposable = Observable.create(
-                (ObservableOnSubscribe<ResponseResult<List<ChatsItem>>>) emitter -> {
-                    ResponseResult<List<ChatsItem>> responseResult = repository.getChatsItem();
+                (ObservableOnSubscribe<ResponseResult<List<ChatItem>>>) emitter -> {
+                    ResponseResult<List<ChatItem>> responseResult = repository.getChatItems();
                     emitter.onNext(responseResult);
                 }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
