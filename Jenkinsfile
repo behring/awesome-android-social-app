@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        FLAVOR = 'Mock'//Prod
+    }
+
     stages {
         stage('init') {
             steps {
@@ -81,7 +85,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh './gradlew lintMockCi'
+                        sh "./gradlew lint${FLAVOR}Ci"
                     } catch (err) {
                         currentBuild.result = 'FAILURE'
                         error('lint error...')
@@ -95,7 +99,7 @@ pipeline {
 
         stage('Unit Test') {
             steps {
-                sh './gradlew testMockCiUnitTest'
+                sh "./gradlew test${FLAVOR}CiUnitTest"
             }
         }
 
@@ -105,7 +109,7 @@ pipeline {
                     sh 'adb kill-server'
                     sh 'adb connect jenkins'
                     sh 'cd server && env ENV=ci ./run.sh &'
-                    sh './gradlew connectedAndroidTest -PENV=ci'
+                    sh "./gradlew connected${FLAVOR}CiAndroidTest -PENV=ci"
                     sh 'kill $(lsof -t -i:5000)'
                     sh 'adb disconnect jenkins'
                 }
