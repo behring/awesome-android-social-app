@@ -15,7 +15,7 @@ sonarqube {
         def files = unit.join(", ")
         property "sonar.jacoco.reportPaths", files
         property "sonar.java.coveragePlugin", "jacoco"
-        property "sonar.junit.reportsPath", "app/build/test-results/testDebugUnitTest"
-        property "sonar.android.lint.report", "app/build/reports/lint-results.xml"
+        property "sonar.junit.reportsPath", "$project.projectDir/build/test-results/testDebugUnitTest"
+        property "sonar.android.lint.report", "$project.projectDir/build/reports/lint-results.xml"
     }
 }

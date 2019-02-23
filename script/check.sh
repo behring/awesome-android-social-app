@@ -2,12 +2,14 @@
 
 ${ANDROID_SDK}/tools/emulator @Nexus_5X_API_26 &
 
-cd ../server && ./run.sh &
-cd ..
-
-./gradlew --stop
+#product test need run server
+#cd ../server && ./run.sh &
+#cd ..
 #./gradlew clean pmd findbugs checkstyle lintProdDebug testProdDebugUnitTest connectedProdDebugAndroidTest
+
+#mock test
 ./gradlew clean pmd findbugs checkstyle lintMockDebug testMockDebugUnitTest connectedMockDebugAndroidTest
+
 ./gradlew sonarqube -Dsonar.branch=master -Dsonar.host.url=http://localhost:9001
 
 # kill emulator
