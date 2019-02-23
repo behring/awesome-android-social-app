@@ -35,7 +35,7 @@ public final class ViewModelFactory extends ViewModelProvider.NewInstanceFactory
         if (modelClass.isAssignableFrom(ChatsViewModel.class)) {
             return (T) new ChatsViewModel(application, repository);
         } else if (modelClass.isAssignableFrom(LoginViewModel.class)) {
-            return (T) new LoginViewModel(application);
+            return (T) new LoginViewModel(application, repository);
         } else {
             throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
         }

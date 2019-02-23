@@ -1,12 +1,24 @@
 package com.thoughtworks.awesomesocialapp.chats.models;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
 import java.util.Date;
+import com.google.gson.annotations.SerializedName;
+import com.thoughtworks.awesomesocialapp.models.Table;
 
-public class ChatsItem {
+
+@Entity(tableName = "chat_item")
+public class ChatsItem extends Table {
+    @ColumnInfo(name = "avatar_url")
+    @SerializedName("avatar_url")
     private String avatarUrl;
     private String name;
     private Date time;
+    @ColumnInfo(name = "new_message")
+    @SerializedName("new_message")
     private String newMessage;
+    @ColumnInfo(name = "new_message_count")
+    @SerializedName("new_message_count")
     private int newMessageCount;
 
     public String getAvatarUrl() {

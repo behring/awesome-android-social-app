@@ -9,7 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+import java.util.List;
+import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
 import com.thoughtworks.awesomesocialapp.common.ViewModelFactory;
+import com.thoughtworks.awesomesocialapp.data.FetchDataCallback;
 import com.thoughtworks.awesomesocialapp.databinding.FragmentChatsBinding;
 
 public class ChatsFragment extends Fragment {
@@ -43,6 +47,16 @@ public class ChatsFragment extends Fragment {
             ViewModelFactory factory = ViewModelFactory.getInstance(getActivity().getApplication());
             viewModel = ViewModelProviders.of(this, factory).get(ChatsViewModel.class);
         }
-        adapter.updateData(viewModel.getData());
+        viewModel.getData(new FetchDataCallback<List<ChatsItem>>() {
+            @Override
+            public void onFetchDataSuccess(List<ChatsItem> data) {
+                adapter.updateData(data);
+            }
+
+            @Override
+            public void onFetchDataFailure(Throwable throwable) {
+                Toast.makeText(getContext(), "获取数据失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

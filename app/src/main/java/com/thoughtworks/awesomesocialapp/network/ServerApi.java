@@ -1,8 +1,12 @@
 package com.thoughtworks.awesomesocialapp.network;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
+import com.thoughtworks.awesomesocialapp.constants.NetworkConstants;
+import com.thoughtworks.awesomesocialapp.data.remote.services.ChatService;
 import com.thoughtworks.awesomesocialapp.data.remote.services.LoginService;
 import com.thoughtworks.awesomesocialapp.models.User;
 import com.thoughtworks.awesomesocialapp.network.models.ResponseResult;
@@ -33,6 +37,13 @@ public final class ServerApi implements ServerApiInterface {
 
     @Override
     public ResponseResult<List<ChatsItem>> getChatsItems() {
-        return null;
+        ChatService service = RetrofitHelper.getRetrofit().create(ChatService.class);
+        Call<ResponseResult<List<ChatsItem>>> call = service.getChatItems();
+        try {
+            return call.execute().body();
+        } catch (IOException e) {
+            Timber.e(e);
+            return null;
+        }
     }
 }
