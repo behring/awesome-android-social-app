@@ -12,11 +12,6 @@ public class User extends Table {
 
     private String token;
 
-    public User(String accountName, String token) {
-        this.accountName = accountName;
-        this.token = token;
-    }
-
     public String getAccountName() {
         return accountName;
     }
