@@ -1,8 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'jacoco'
-apply plugin: 'checkstyle'
-apply plugin: 'findbugs'
-apply plugin: 'pmd'
+apply from: "../check.gradle"
 
 android {
     compileSdkVersion 28
@@ -81,84 +78,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    tasks.withType(Test) {
-        jacoco.includeNoLocationClasses = true
-    }
 }
 
-task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
 
-    reports {
-        xml.enabled = true
-        html.enabled = true
-    }
-
-    def fileFilter = ['**/R.class',
-                      '**/R$*.class',
-                      '**/BuildConfig.*',
-                      '**/Manifest*.*',
-                      '**/*Test*.*',
-                      '**/*BR*.*',
-                      '**/DataBinderMapperImpl*.*',
-                      '**/android/*',
-                      '**/com/thoughtworks/awesomesocialapp/databinding/*',
-                      '**/com/thoughtworks/awesomesocialapp/DataBindingInfo.*']
-    def mainSrc = "${project.projectDir}/src/main/java"
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/javac", excludes: fileFilter)
-
-    sourceDirectories = files([mainSrc])
-    classDirectories = files([debugTree])
-
-    executionData = fileTree(dir: "$buildDir", includes: [
-            "jacoco/testDebugUnitTest.exec",
-            "outputs/code_coverage/debugAndroidTest/connected/*coverage.ec"
-    ])
-}
-
-task checkstyle(type: Checkstyle) {
-    description = "Check Java style with Checkstyle"
-    configFile = rootProject.file("config/checkstyle/google_checks.xml")
-    source = 'src/main/java'
-    classpath = files()
-    ignoreFailures = false
-
-    reports {
-        xml.enabled false
-        html.enabled true
-        html.stylesheet resources.text.fromFile('../config/checkstyle/xsl/checkstyle-frames.xsl')
-    }
-}
-
-task findbugs(type: FindBugs, dependsOn: ['assemble']) {
-    ignoreFailures = false
-    effort = "max" // default max
-    reportLevel = "low"//low medium high
-    classes = files("$project.buildDir/intermediates/javac")
-    excludeFilter = file("$rootProject.rootDir/config/findbugs/findbugs-exclude.xml")
-
-    source = fileTree('src/main/java/')
-    classpath = files()
-
-    reports {
-        xml.enabled = false
-        xml.withMessages = true
-        html.enabled = !xml.isEnabled()
-        xml.destination "$project.buildDir/reports/findbugs/findbugs-output.xml"
-        html.destination "$project.buildDir/reports/findbugs/findbugs-output.html"
-    }
-}
-
-task pmd(type: Pmd) {
-    ruleSetFiles = files("$project.rootDir/config/pmd/rules-pmd.xml")
-    source = fileTree('src/main/java/')
-
-    reports {
-        xml.enabled = false
-        html.enabled = true
-        html.destination = "$project.buildDir/reports/pmd/pmd.html"
-    }
-}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'

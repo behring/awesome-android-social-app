@@ -1,5 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-apply plugin: "org.sonarqube"
+apply from: "sonar.gradle"
 
 buildscript {
     
@@ -13,26 +13,6 @@ buildscript {
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-    }
-}
-
-sonarqube {
-    properties {
-        property "sonar.sources", "**/main/java/"
-        property "sonar.java.binaries", "."
-        property "sonar.projectKey", "awesome-android-social-app"
-        property "sonar.host.url", "http://localhost:9000"
-        property "sonar.sourceEncoding", "UTF-8"
-        property "sonar.branch", "master"
-
-        def unit = fileTree(dir: project.projectDir, includes: ['**/*.exec']).files
-        def ui = fileTree(dir: project.projectDir, includes: ['**/*.ec']).files
-        unit.addAll(ui)
-        def files = unit.join(", ")
-        property "sonar.jacoco.reportPaths", files
-        property "sonar.java.coveragePlugin", "jacoco"
-        property "sonar.junit.reportsPath", "app/build/test-results/testDebugUnitTest"
-        property "sonar.android.lint.report", "app/build/reports/lint-results.xml"
     }
 }
 

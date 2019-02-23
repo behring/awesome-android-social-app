@@ -1,0 +1,81 @@
+apply plugin: 'jacoco'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
+def flavor='mockDebug'
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ["test${flavor.capitalize()}UnitTest",
+                                                      "create${flavor.capitalize()}CoverageReport"]) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class',
+                      '**/R$*.class',
+                      '**/*_Impl*.class',
+                      '**/BuildConfig.*',
+                      '**/Manifest*.*',
+                      '**/*Test*.*',
+                      '**/*BR*.*',
+                      '**/DataBinderMapperImpl*.*',
+                      '**/android/*',
+                      '**/com/thoughtworks/awesomesocialapp/databinding/*',
+                      '**/com/thoughtworks/awesomesocialapp/DataBindingInfo.*']
+    def mainSrc = "${project.projectDir}/src/main/java"
+    def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/${flavor}", excludes: fileFilter)
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+
+    executionData = fileTree(dir: "$buildDir", includes: [
+            "jacoco/test${flavor.capitalize()}UnitTest.exec",
+            "outputs/code_coverage/${flavor}AndroidTest/connected/*coverage.ec"
+    ])
+}
+
+task checkstyle(type: Checkstyle) {
+    description = "Check Java style with Checkstyle"
+    configFile = rootProject.file("config/checkstyle/google_checks.xml")
+    source = 'src/main/java'
+    classpath = files()
+    ignoreFailures = false
+
+    reports {
+        xml.enabled false
+        html.enabled true
+        html.stylesheet resources.text.fromFile('../config/checkstyle/xsl/checkstyle-frames.xsl')
+    }
+}
+
+task findbugs(type: FindBugs, dependsOn: ['assemble']) {
+    ignoreFailures = false
+    effort = "max" // default max
+    reportLevel = "low"//low medium high
+    classes = files("$project.buildDir/intermediates/javac/${flavor}")
+    excludeFilter = file("$rootProject.rootDir/config/findbugs/findbugs-exclude.xml")
+
+    source = fileTree('src/main/java/')
+    classpath = files()
+
+    reports {
+        xml.enabled = false
+        xml.withMessages = true
+        html.enabled = !xml.isEnabled()
+        xml.destination "$project.buildDir/reports/findbugs/findbugs-output.xml"
+        html.destination "$project.buildDir/reports/findbugs/findbugs-output.html"
+    }
+}
+
+task pmd(type: Pmd) {
+    ruleSetFiles = files("$project.rootDir/config/pmd/rules-pmd.xml")
+    source = fileTree('src/main/java/')
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html.destination = "$project.buildDir/reports/pmd/pmd.html"
+    }
+}
