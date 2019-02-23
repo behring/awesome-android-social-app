@@ -29,7 +29,7 @@ public class LoginFragmentAndroidTest {
         onView(withId(R.id.account_name_input)).perform(typeText(DEFAULT_ACCOUNT_NAME));
         onView(withId(R.id.password_input)).perform(typeText(DEFAULT_PASSWORD));
         onView(withText(R.string.login)).perform(click());
-        onView(withText("ChatsFragment")).check(matches(isDisplayed()));
+        onView(withId(R.id.navigation_tab_bar)).check(matches(isDisplayed()));
     }
 
     @Test
