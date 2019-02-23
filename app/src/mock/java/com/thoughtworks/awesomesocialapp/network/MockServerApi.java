@@ -19,18 +19,13 @@ public final class MockServerApi implements ServerApiInterface {
     }
 
     @Override
-    public ResponseResult login(String accountName, String password) {
-        if (accountName.equals("behring") && password.equals("111111")) {
-            User user = new User("behring", "qazxswedcvfr");
-            return getSuccessResponseResult(user);
-        } else {
-            return getFailureResponseResult(NetworkConstants.Code.LOGIN_ACCOUNT_OR_PASSWORD_ERROR,
-                    "用户名或密码错误");
-        }
+    public ResponseResult<User> login(String accountName, String password) {
+        User user = new User("zhaolin", "qazxswedcvfr");
+        return getSuccessResponseResult(user);
     }
 
     @Override
-    public ResponseResult getChatsItems() {
+    public ResponseResult<List<ChatsItem>> getChatsItems() {
         return getSuccessResponseResult(mockChatsItems());
     }
 
@@ -38,13 +33,6 @@ public final class MockServerApi implements ServerApiInterface {
         ResponseResult<T> responseResult = new ResponseResult<>();
         responseResult.setCode(NetworkConstants.Code.SUCCESS);
         responseResult.setData(data);
-        return responseResult;
-    }
-
-    private ResponseResult getFailureResponseResult(int code, String message) {
-        ResponseResult responseResult = new ResponseResult();
-        responseResult.setCode(code);
-        responseResult.setMessage(message);
         return responseResult;
     }
 
