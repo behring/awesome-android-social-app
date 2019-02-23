@@ -7,6 +7,7 @@ import com.thoughtworks.awesomesocialapp.chats.models.ChatsItem;
 import com.thoughtworks.awesomesocialapp.constants.NetworkConstants;
 import com.thoughtworks.awesomesocialapp.models.User;
 import com.thoughtworks.awesomesocialapp.network.models.ResponseResult;
+import com.thoughtworks.awesomesocialapp.constants.ServerCode;
 
 public final class MockServerApi implements ServerApiInterface {
     private static MockServerApi instance = new MockServerApi();
@@ -26,7 +27,7 @@ public final class MockServerApi implements ServerApiInterface {
             user.setToken("qazxswedcvfr");
             return getSuccessResponseResult(user);
         } else {
-            return getFailureResponseResult(NetworkConstants.Code.LOGIN_ACCOUNT_OR_PASSWORD_ERROR,
+            return getFailureResponseResult(ServerCode.LOGIN_ACCOUNT_OR_PASSWORD_ERROR,
                     "用户名或密码错误", new User());
         }
     }
@@ -38,7 +39,7 @@ public final class MockServerApi implements ServerApiInterface {
 
     private <T> ResponseResult<T> getSuccessResponseResult(T data) {
         ResponseResult<T> responseResult = new ResponseResult<>();
-        responseResult.setCode(NetworkConstants.Code.SUCCESS);
+        responseResult.setCode(ServerCode.SUCCESS);
         responseResult.setData(data);
         return responseResult;
     }
