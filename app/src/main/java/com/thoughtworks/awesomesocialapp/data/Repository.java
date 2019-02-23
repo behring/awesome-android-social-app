@@ -32,6 +32,10 @@ public final class Repository {
         return api;
     }
 
+    AppDatabase getDatabase() {
+        return database;
+    }
+
     public ResponseResult<List<ChatItem>> getChatItems() {
         ResponseResult<List<ChatItem>> responseResult = new ResponseResult<>();
         List<ChatItem> chatItems = database.getChatItemDao().getChatItems();

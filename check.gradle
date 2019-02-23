@@ -5,6 +5,13 @@ apply plugin: 'pmd'
 
 def flavor='mockDebug'
 
+android {
+    //如果不加这个，robolectric的ut不会被jacoco识别
+    tasks.withType(Test) {
+        jacoco.includeNoLocationClasses = true
+    }
+}
+
 task jacocoTestReport(type: JacocoReport, dependsOn: ["test${flavor.capitalize()}UnitTest",
                                                       "create${flavor.capitalize()}CoverageReport"]) {
 
