@@ -8,25 +8,6 @@ pipeline {
             }
         }
 
-        stage('Unit Test') {
-            steps {
-                sh './gradlew testMockCiUnitTest'
-            }
-        }
-
-        stage('Android Test') {
-            steps {
-                retry(3) {
-                    sh 'adb kill-server'
-                    sh 'adb connect jenkins'
-                    sh 'cd server && env ENV=ci ./run.sh &'
-                    sh './gradlew connectedAndroidTest -PENV=ci'
-                    sh 'kill $(lsof -t -i:5000)'
-                    sh 'adb disconnect jenkins'
-                }
-            }
-        }
-
         stage('pmd') {
             steps {
                 script {
@@ -108,6 +89,25 @@ pipeline {
                     } finally {
                         androidLint()
                     }
+                }
+            }
+        }
+
+        stage('Unit Test') {
+            steps {
+                sh './gradlew testMockCiUnitTest'
+            }
+        }
+
+        stage('Android Test') {
+            steps {
+                retry(3) {
+                    sh 'adb kill-server'
+                    sh 'adb connect jenkins'
+                    sh 'cd server && env ENV=ci ./run.sh &'
+                    sh './gradlew connectedAndroidTest -PENV=ci'
+                    sh 'kill $(lsof -t -i:5000)'
+                    sh 'adb disconnect jenkins'
                 }
             }
         }
