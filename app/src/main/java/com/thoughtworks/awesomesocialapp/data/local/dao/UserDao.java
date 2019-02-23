@@ -7,6 +7,6 @@ import com.thoughtworks.awesomesocialapp.models.User;
 @Dao
 public interface UserDao {
 
-    @Query("SELECT * FROM User WHERE token = :token")
+    @Query("SELECT * FROM user WHERE token = :token")
     User getUserByToken(String token);
 }

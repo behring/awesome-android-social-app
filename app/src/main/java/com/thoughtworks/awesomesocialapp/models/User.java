@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 
-@Entity
+@Entity(tableName = "user")
 public class User extends Table {
     @ColumnInfo(name = "account_name")
     @SerializedName("account_name")
