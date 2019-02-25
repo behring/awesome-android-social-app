@@ -32,7 +32,7 @@ public final class Repository {
         return api;
     }
 
-    AppDatabase getDatabase() {
+    public AppDatabase getDatabase() {
         return database;
     }
 

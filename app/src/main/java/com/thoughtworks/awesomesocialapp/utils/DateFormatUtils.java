@@ -4,16 +4,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import com.thoughtworks.awesomesocialapp.constants.NetworkConstants;
 
 public final class DateFormatUtils {
-    private static final String DEFAULT_DATE_FORMAT = "yyyy-mm-dd hh:mm:ss";
 
     private DateFormatUtils() {
 
     }
 
     public static String getDateStr(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat(DEFAULT_DATE_FORMAT, Locale.getDefault());
+        DateFormat dateFormat = new SimpleDateFormat(NetworkConstants.DATE_FORMAT, Locale.getDefault());
         return dateFormat.format(date);
     }
 

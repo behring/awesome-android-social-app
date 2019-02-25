@@ -3,6 +3,12 @@
         <Class name="~.*R\$.*"/>
     </Match>
     <Match>
+        <Class name="~.*_Impl.*"/>
+    </Match>
+    <Match>
+        <Class name="~.*_Impl\$.*"/>
+    </Match>
+    <Match>
         <Class name="~.*Manifest\$.*"/>
     </Match>
     <Match>
