@@ -15,4 +15,7 @@ public interface ChatItemDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(List<ChatItem> chatItems);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(ChatItem... chatItems);
 }

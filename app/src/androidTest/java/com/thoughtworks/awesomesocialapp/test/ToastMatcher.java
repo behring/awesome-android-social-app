@@ -1,4 +1,4 @@
-package com.thoughtworks.awesomesocialapp;
+package com.thoughtworks.awesomesocialapp.test;
 
 import android.os.IBinder;
 import android.view.WindowManager;

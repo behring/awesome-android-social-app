@@ -1,7 +1,7 @@
 package com.thoughtworks.awesomesocialapp.login;
 
 import com.thoughtworks.awesomesocialapp.R;
-import com.thoughtworks.awesomesocialapp.ToastMatcher;
+import com.thoughtworks.awesomesocialapp.test.ToastMatcher;
 
 import org.junit.Rule;
 import org.junit.Test;
