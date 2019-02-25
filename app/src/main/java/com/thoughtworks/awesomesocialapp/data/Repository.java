@@ -38,7 +38,7 @@ public final class Repository {
 
     public ResponseResult<List<ChatItem>> getChatItems() {
         ResponseResult<List<ChatItem>> responseResult = new ResponseResult<>();
-        List<ChatItem> chatItems = database.getChatItemDao().getChatItems();
+        List<ChatItem> chatItems = database.getChatItemDao().findChatItems();
         if (chatItems != null && !chatItems.isEmpty()) {
             responseResult.setData(chatItems);
             responseResult.setCode(LocalCode.QUERY_SUCCESS);

@@ -11,8 +11,8 @@ import com.thoughtworks.awesomesocialapp.chats.models.ChatItem;
 public interface ChatItemDao {
 
     @Query("SELECT * FROM chat_item")
-    List<ChatItem> getChatItems();
+    List<ChatItem> findChatItems();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertChatItems(List<ChatItem> chatItems);
+    void insert(List<ChatItem> chatItems);
 }

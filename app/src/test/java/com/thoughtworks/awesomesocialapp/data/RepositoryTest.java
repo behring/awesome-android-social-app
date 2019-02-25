@@ -37,7 +37,7 @@ public class RepositoryTest {
 
     @Test
     public void getChatItems_WhenDatabaseHasData_MustGetDataForDatabase() {
-        repository.getDatabase().getChatItemDao().insertChatItems(mockChatItems());
+        repository.getDatabase().getChatItemDao().insert(mockChatItems());
         ResponseResult responseResult = repository.getChatItems();
         assertEquals(LocalCode.QUERY_SUCCESS, responseResult.getCode());
     }
