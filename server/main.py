@@ -4,14 +4,14 @@ from flask import request
 
 app = Flask(__name__)
 
-
+SUCCESS_CODE = 1
 @app.route('/login', methods=['POST'])
 def login():
     account_name = request.form.get('account_name')
     password = request.form.get('password')
     response = {}
     if account_name == 'behring' and password == '111111':
-        response['code'] = 0
+        response['code'] = SUCCESS_CODE
         response['message'] = 'login success'
         response['data'] = {'token': '123132r24er2dsfdsf'}
     else:
@@ -21,7 +21,7 @@ def login():
 
 @app.route('/chat_items', methods=['GET'])
 def get_chat_items():
-    response = {'code': 0, 'message': 'get chat items success'}
+    response = {'code': SUCCESS_CODE, 'message': 'get chat items success'}
     data = []
     for number in range(10):
         chat_item = {'avatar_url': 'http://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000' \
