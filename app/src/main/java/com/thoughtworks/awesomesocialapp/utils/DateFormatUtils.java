@@ -13,7 +13,8 @@ public final class DateFormatUtils {
     }
 
     public static String getDateStr(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat(NetworkConstants.DATE_FORMAT, Locale.getDefault());
+        DateFormat dateFormat = new SimpleDateFormat(NetworkConstants.DATE_FORMAT,
+                Locale.getDefault());
         return dateFormat.format(date);
     }
 

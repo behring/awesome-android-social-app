@@ -1,9 +1,9 @@
 package com.thoughtworks.awesomesocialapp.chats.models;
 
+import com.google.gson.annotations.SerializedName;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import java.util.Date;
-import com.google.gson.annotations.SerializedName;
 import com.thoughtworks.awesomesocialapp.models.Table;
 
 
