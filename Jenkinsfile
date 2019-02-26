@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        FLAVOR = 'Mock'//Prod
+        FLAVOR = 'Prod'//Prod,Mock
     }
 
     stages {
