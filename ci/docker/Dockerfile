@@ -4,9 +4,15 @@ MAINTAINER Behring Zhao <behring.zhao@gmail.com>
 ARG ANDROID_SDK_TOOLS_ZIP=sdk-tools-linux-4333796.zip
 ARG GRADLE_VERSION=4.10.1
 
+# ENV http_proxy='http://username:password@proxy.xxx.com:8080'
+# ENV http_proxys='https://username:password@proxy.xxx.com:8080'
+
+
 ENV GRADLE_NAME gradle-$GRADLE_VERSION
 ENV GRADLE_ZIP gradle-$GRADLE_VERSION-bin.zip
-ENV ANDROID_HOME /opt/android/sdk
+
+ENV ANDROID_DIR /opt/android
+ENV ANDROID_HOME ${ANDROID_DIR}/sdk
 ENV PATH $ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/$GRADLE_NAME/bin:$PATH
 
 # https://developer.android.com/studio/#command-tools
@@ -27,14 +33,16 @@ RUN mkdir -p $ANDROID_HOME \
 	&& unzip /opt/$GRADLE_ZIP -d $ANDROID_HOME/ \
 	&& rm /opt/$ANDROID_SDK_TOOLS_ZIP \
 	&& rm /opt/$GRADLE_ZIP
-	
+
 #Set sdk licenses, install platform-tools and required sdk, build-tools
-RUN yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses \
-	&& yes | android update sdk --no-ui --all --filter platform-tools,android-28,build-tools-28.0.3
+RUN yes | $ANDROID_HOME/tools/bin/sdkmanager --list --proxy=http --proxy_host=127.0.0.1 --proxy_port=8080 \
+	&& yes | $ANDROID_HOME/tools/bin/sdkmanager 'platform-tools' 'platforms:android-28' 'build-tools;28.0.3' --proxy=http --proxy_host=127.0.0.1 --proxy_port=8080
+RUN chmod -R 777 $ANDROID_DIR
 
 #Install flask
 RUN apt-get install lsof && apt-get -y install python-pip && pip install Flask
 
 USER jenkins
 # List desired Jenkins plugins here
-RUN /usr/local/bin/install-plugins.sh workflow-aggregator git android-lint htmlpublisher build-monitor-plugin sonar
+RUN /usr/local/bin/install-plugins.sh workflow-aggregator git android-lint htmlpublisher \
+    build-monitor-plugin sonar extended-choice-parameter blueocean
