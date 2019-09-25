@@ -44,4 +44,4 @@ RUN apt-get install lsof && apt-get -y install python-pip && pip install Flask
 
 USER jenkins
 # List desired Jenkins plugins here
-RUN /usr/local/bin/install-plugins.sh workflow-aggregator git android-lint htmlpublisher build-monitor-plugin sonar extended-choice-parameter blueocean
+RUN /usr/local/bin/install-plugins.sh workflow-aggregator git android-lint htmlpublisher build-monitor-plugin sonar extended-choice-parameter blueocean pipeline-utility-steps

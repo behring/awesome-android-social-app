@@ -1,8 +1,27 @@
+def BUILD_MODULES
+node {
+    def props = readProperties file: './parameterized_build.properties'
+    BUILD_MODULES = props['build_modules']
+}
+
 pipeline {
     agent any
 
     triggers {
         pollSCM('H/2 * * * *')
+    }
+
+    paramters {
+        extendedChoice(
+                name: 'BUILD_ANDROID_MODULE',
+                description: '需要构建的Android模块',
+                quoteValue: false,
+                saveJSONParameterToFile: false,
+                type: 'PT_CHECKBOX',
+                multiSelectDelimiter: ',',
+                value: "${BUILD_MODULES}",
+                visibleItemCount: 10
+        )
     }
 
     environment {
