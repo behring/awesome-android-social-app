@@ -34,9 +34,9 @@ RUN mkdir -p $ANDROID_HOME \
 	&& rm /opt/$ANDROID_SDK_TOOLS_ZIP \
 	&& rm /opt/$GRADLE_ZIP
 
-#Set sdk licenses, install platform-tools and required sdk, build-tools
-RUN yes | $ANDROID_HOME/tools/bin/sdkmanager --list --proxy=http --proxy_host=127.0.0.1 --proxy_port=8080 \
-	&& yes | $ANDROID_HOME/tools/bin/sdkmanager 'platform-tools' 'platforms:android-28' 'build-tools;28.0.3' --proxy=http --proxy_host=127.0.0.1 --proxy_port=8080
+#Set sdk licenses, install platform-tools and required sdk, build-tools, need '--proxy=http --proxy_host=proxy.xxx.com --proxy_port=8080' when use proxy
+RUN yes | $ANDROID_HOME/tools/bin/sdkmanager --list  \
+	&& yes | $ANDROID_HOME/tools/bin/sdkmanager 'platform-tools' 'platforms;android-28' 'build-tools;28.0.3'
 RUN chmod -R 777 $ANDROID_DIR
 
 #Install flask
@@ -44,5 +44,4 @@ RUN apt-get install lsof && apt-get -y install python-pip && pip install Flask
 
 USER jenkins
 # List desired Jenkins plugins here
-RUN /usr/local/bin/install-plugins.sh workflow-aggregator git android-lint htmlpublisher \
-    build-monitor-plugin sonar extended-choice-parameter blueocean
+RUN /usr/local/bin/install-plugins.sh workflow-aggregator git android-lint htmlpublisher build-monitor-plugin sonar extended-choice-parameter blueocean
