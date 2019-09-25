@@ -38,6 +38,19 @@ pipeline {
             }
         }
 
+        stage('check selected modules') {
+            steps {
+                script {
+                    def selectedModules = env.DEFAULT_BUILD_MODULES
+                    if (selectedModules == null || selectedModules.trim()=='') {
+                        currentBuild.result = 'ABORTED'
+                        error('have not selected build modules')
+                    }
+                    echo "===========seleted modules: ${selectedModules}==============="
+                }
+            }
+        }
+
         stage('pmd') {
             steps {
                 script {
