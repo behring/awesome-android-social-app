@@ -1,7 +1,9 @@
 def BUILD_MODULES
+def DEFAULT_BUILD_MODULES
 node {
     def props = readProperties file: './parameterized_build.properties'
     BUILD_MODULES = props['build_modules']
+    DEFAULT_BUILD_MODULES = props['default_build_modules']
 }
 
 pipeline {
@@ -19,6 +21,7 @@ pipeline {
                 saveJSONParameterToFile: false,
                 type: 'PT_CHECKBOX',
                 multiSelectDelimiter: ',',
+                defaultValue: "${DEFAULT_BUILD_MODULES}",
                 value: "${BUILD_MODULES}",
                 visibleItemCount: 10
         )
