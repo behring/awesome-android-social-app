@@ -18,6 +18,7 @@ ENV PATH $ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/$GRADLE_
 # https://developer.android.com/studio/#command-tools
 ENV ANDROID_SDK_TOOLS_URL https://dl.google.com/android/repository/$ANDROID_SDK_TOOLS_ZIP
 ENV GRADLE_URL https://services.gradle.org/distributions/$GRADLE_ZIP
+ENV JENKINS_HOME /var/jenkins_home
 
 USER root
 
@@ -38,6 +39,7 @@ RUN mkdir -p $ANDROID_HOME \
 RUN yes | $ANDROID_HOME/tools/bin/sdkmanager --list  \
 	&& yes | $ANDROID_HOME/tools/bin/sdkmanager 'platform-tools' 'platforms;android-28' 'build-tools;28.0.3'
 RUN chmod -R 777 $ANDROID_DIR
+RUN sudo chown jenkins:jenkins $JENKINS_HOME
 
 #Install flask
 RUN apt-get install lsof && apt-get -y install python-pip && pip install Flask
