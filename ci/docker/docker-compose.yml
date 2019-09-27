@@ -33,7 +33,7 @@ services:
       - ~/docker/volumes/mysql:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: sonarqube
+      MYSQL_ROOT_PASSWORD: mateline
       MYSQL_DATABASE: sonarqube
       MYSQL_USER: sonarqube
       MYSQL_PASSWORD: sonarqube
