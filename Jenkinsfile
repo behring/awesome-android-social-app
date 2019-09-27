@@ -28,13 +28,13 @@ pipeline {
     }
 
     options {
-        buildDiscarder {
+        buildDiscarder(
             logRotator(
                     numToKeepStr: '1',
                     artifactDaysToKeepStr: '1',
                     artifactNumToKeepStr: '1'
             )
-        }
+        )
     }
 
     environment {
