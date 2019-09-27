@@ -13,7 +13,7 @@ pipeline {
         pollSCM('H/2 * * * *')
     }
 
-    paramters {
+    parameters {
         extendedChoice(
                 name: 'BUILD_ANDROID_MODULE',
                 description: '需要构建的Android模块',
@@ -25,6 +25,16 @@ pipeline {
                 value: "${BUILD_MODULES}",
                 visibleItemCount: 10
         )
+    }
+
+    options {
+        buildDiscarder {
+            logRotator(
+                    numToKeepStr: '1',
+                    artifactDaysToKeepStr: '1',
+                    artifactNumToKeepStr: '1'
+            )
+        }
     }
 
     environment {
