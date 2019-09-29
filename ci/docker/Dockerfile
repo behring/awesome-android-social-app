@@ -38,8 +38,8 @@ RUN mkdir -p $ANDROID_HOME \
 #Set sdk licenses, install platform-tools and required sdk, build-tools, need '--proxy=http --proxy_host=proxy.xxx.com --proxy_port=8080' when use proxy
 RUN yes | $ANDROID_HOME/tools/bin/sdkmanager --list  \
 	&& yes | $ANDROID_HOME/tools/bin/sdkmanager 'platform-tools' 'platforms;android-28' 'build-tools;28.0.3'
-RUN chmod -R 777 $ANDROID_DIR
-RUN sudo chown jenkins:jenkins $JENKINS_HOME
+RUN chown jenkins:jenkins $ANDROID_DIR
+RUN chown jenkins:jenkins $JENKINS_HOME
 
 #Install flask
 RUN apt-get install lsof && apt-get -y install python-pip && pip install Flask
