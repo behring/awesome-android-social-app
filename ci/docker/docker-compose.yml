@@ -14,7 +14,7 @@ services:
         aliases:
           - jenkins
   emulator:
-    image: behring/android-emulator
+    image: behring/android-emulator:latest
     environment:
       EMULATOR: android-24
     ports:
