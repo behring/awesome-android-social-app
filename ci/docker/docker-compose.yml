@@ -14,9 +14,9 @@ services:
         aliases:
           - jenkins
   emulator:
-    image: tracer0tong/android-emulator:latest
+    image: behring/android-emulator
     environment:
-      EMULATOR: android-22
+      EMULATOR: android-24
     ports:
       - "5555"
       - "80"
