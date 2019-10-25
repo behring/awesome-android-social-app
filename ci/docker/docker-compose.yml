@@ -10,9 +10,8 @@ services:
     volumes:
       - ~/docker/volumes/jenkins-android/jenkins_home:/var/jenkins_home
     networks:
-      network0:
-        aliases:
-          - jenkins
+      - jenkins
+
   emulator:
     image: behring/android-emulator:latest
     environment:
@@ -26,34 +25,32 @@ services:
       - "5554"
       - "5900"
     networks:
-      network0:
-        aliases:
-          - jenkins
+      - jenkins
+
   db:
-    image: mysql
-    volumes:
-      - ~/docker/volumes/mysql:/var/lib/mysql
-    restart: always
+    image: postgres
+    networks:
+      - jenkins
     environment:
-      MYSQL_ROOT_PASSWORD: mateline
-      MYSQL_DATABASE: sonarqube
-      MYSQL_USER: sonarqube
-      MYSQL_PASSWORD: sonarqube
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    volumes:
+      - ~/docker/volumes/postgresql:/var/lib/postgresql
+      - ~/docker/volumes/postgresql/data:/var/lib/postgresql/data
+
   sonarqube:
-    depends_on:
-      - db
-    image: sonarqube:latest
-    restart: always
+    image: sonarqube
     ports:
       - "9000:9000"
-      - "9092:9092"
-    environment:
-      SONARQUBE_JDBC_USERNAME: sonarqube
-      SONARQUBE_JDBC_PASSWORD: sonarqube
-      SONARQUBE_JDBC_URL: jdbc:mysql://db:3306/sonarqube?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
     networks:
-      network0:
-        aliases:
-          - jenkins
+      - jenkins
+    environment:
+      - sonar.jdbc.url=jdbc:postgresql://db:5432/sonar
+    volumes:
+      - ~/docker/volumes/sonarqube/conf:/opt/sonarqube/conf
+      - ~/docker/volumes/sonarqube/data:/opt/sonarqube/data
+      - ~/docker/volumes/sonarqube/extensions:/opt/sonarqube/extensions
+
 networks:
-  network0:
+  jenkins:
+    driver: bridge

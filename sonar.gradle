@@ -1,5 +1,5 @@
 apply plugin: "org.sonarqube"
-
+//sonar7.9以后不支持mysql了
 sonarqube {
     properties {
         property "sonar.sources", "**/main/java/"
