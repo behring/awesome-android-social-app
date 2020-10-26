@@ -152,18 +152,18 @@ pipeline {
             }
         }
 
-        stage('Android Test') {
-            steps {
-                retry(3) {
-                    sh 'adb kill-server'
-                    sh 'adb connect jenkins'
-                    sh 'cd server && env ENV=ci ./run.sh &'
-                    sh "./gradlew connected${FLAVOR}CiAndroidTest -PENV=ci"
-                    sh 'kill $(lsof -t -i:5000)'
-                    sh 'adb disconnect jenkins'
-                }
-            }
-        }
+//        stage('Android Test') {
+//            steps {
+//                retry(3) {
+//                    sh 'adb kill-server'
+//                    sh 'adb connect jenkins'
+//                    sh 'cd server && env ENV=ci ./run.sh &'
+//                    sh "./gradlew connected${FLAVOR}CiAndroidTest -PENV=ci"
+//                    sh 'kill $(lsof -t -i:5000)'
+//                    sh 'adb disconnect jenkins'
+//                }
+//            }
+//        }
 
         stage('SonarQube analysis') {
             steps {
