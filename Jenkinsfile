@@ -48,104 +48,104 @@ pipeline {
             }
         }
 
-        stage('check selected modules') {
-            steps {
-                script {
-                    def selectedModules = env.BUILD_ANDROID_MODULE
-                    if (selectedModules == null || selectedModules.trim()=='') {
-                        currentBuild.result = 'ABORTED'
-                        error('have not selected build modules')
-                    }
-                    echo "===========seleted modules: ${selectedModules}==============="
-                }
-            }
-        }
-
-        stage('pmd') {
-            steps {
-                script {
-                    try {
-                        sh './gradlew pmd'
-                    } catch (err) {
-                        currentBuild.result = 'FAILURE'
-                        error('pmd error...')
-                        throw err
-                    } finally {
-                        publishHTML target: [
-                                allowMissing: false,
-                                alwaysLinkToLastBuild: false,
-                                keepAll: true,
-                                reportDir: 'app/build/reports/pmd',
-                                reportFiles: 'pmd.html',
-                                reportName: 'PMD Report'
-                        ]
-                    }
-                }
-            }
-        }
-
-        stage('findbugs') {
-            steps {
-                script {
-                    try {
-                        sh './gradlew findbugs'
-                    } catch (err) {
-                        currentBuild.result = 'FAILURE'
-                        error('findbugs error...')
-                        throw err
-                    } finally {
-                        publishHTML target: [
-                                allowMissing: false,
-                                alwaysLinkToLastBuild: false,
-                                keepAll: true,
-                                reportDir: 'app/build/reports/findbugs',
-                                reportFiles: 'findbugs-output.html',
-                                reportName: 'FindBugs Report'
-                        ]
-                    }
-                }
-            }
-        }
-
-        stage('checkstyle') {
-            steps {
-                script {
-                    try {
-                        sh './gradlew checkstyle'
-                    } catch (err) {
-                        currentBuild.result = 'FAILURE'
-                        error('lint error...')
-                        throw err
-                    } finally {
-                        publishHTML target: [
-                                allowMissing: false,
-                                alwaysLinkToLastBuild: false,
-                                keepAll: true,
-                                reportDir: 'app/build/reports/checkstyle',
-                                reportFiles: 'checkstyle.html',
-                                reportName: 'Checkstyle Report'
-                        ]
-                    }
-                }
-            }
-        }
-
-        stage('Lint') {
-            steps {
-                script {
-                    try {
-                        sh "./gradlew lint${FLAVOR}Ci"
-                    } catch (err) {
-                        currentBuild.result = 'FAILURE'
-                        error('lint error...')
-                        throw err
-                    } finally {
-                        androidLint()
-                    }
-                }
-            }
-        }
-
+//        stage('check selected modules') {
+////            steps {
+////                script {
+////                    def selectedModules = env.BUILD_ANDROID_MODULE
+////                    if (selectedModules == null || selectedModules.trim()=='') {
+////                        currentBuild.result = 'ABORTED'
+////                        error('have not selected build modules')
+////                    }
+////                    echo "===========seleted modules: ${selectedModules}==============="
+////                }
+////            }
+////        }
+////
+////        stage('pmd') {
+////            steps {
+////                script {
+////                    try {
+////                        sh './gradlew pmd'
+////                    } catch (err) {
+////                        currentBuild.result = 'FAILURE'
+////                        error('pmd error...')
+////                        throw err
+////                    } finally {
+////                        publishHTML target: [
+////                                allowMissing: false,
+////                                alwaysLinkToLastBuild: false,
+////                                keepAll: true,
+////                                reportDir: 'app/build/reports/pmd',
+////                                reportFiles: 'pmd.html',
+////                                reportName: 'PMD Report'
+////                        ]
+////                    }
+////                }
+////            }
+////        }
+////
+////        stage('findbugs') {
+////            steps {
+////                script {
+////                    try {
+////                        sh './gradlew findbugs'
+////                    } catch (err) {
+////                        currentBuild.result = 'FAILURE'
+////                        error('findbugs error...')
+////                        throw err
+////                    } finally {
+////                        publishHTML target: [
+////                                allowMissing: false,
+////                                alwaysLinkToLastBuild: false,
+////                                keepAll: true,
+////                                reportDir: 'app/build/reports/findbugs',
+////                                reportFiles: 'findbugs-output.html',
+////                                reportName: 'FindBugs Report'
+////                        ]
+////                    }
+////                }
+////            }
+////        }
+////
+////        stage('checkstyle') {
+////            steps {
+////                script {
+////                    try {
+////                        sh './gradlew checkstyle'
+////                    } catch (err) {
+////                        currentBuild.result = 'FAILURE'
+////                        error('lint error...')
+////                        throw err
+////                    } finally {
+////                        publishHTML target: [
+////                                allowMissing: false,
+////                                alwaysLinkToLastBuild: false,
+////                                keepAll: true,
+////                                reportDir: 'app/build/reports/checkstyle',
+////                                reportFiles: 'checkstyle.html',
+////                                reportName: 'Checkstyle Report'
+////                        ]
+////                    }
+////                }
+////            }
+////        }
+////
+////        stage('Lint') {
+////            steps {
+////                script {
+////                    try {
+////                        sh "./gradlew lint${FLAVOR}Ci"
+////                    } catch (err) {
+////                        currentBuild.result = 'FAILURE'
+////                        error('lint error...')
+////                        throw err
+////                    } finally {
+////                        androidLint()
+////                    }
+////                }
+////            }
+////        }
+////
         stage('Unit Test') {
             steps {
                 sh "./gradlew test${FLAVOR}CiUnitTest"
