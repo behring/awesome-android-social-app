@@ -38,7 +38,7 @@ pipeline {
     }
 
     environment {
-        FLAVOR = 'Mock'//Prod,Mock
+        FLAVOR = 'Prod'//Prod,Mock
     }
 
     stages {
@@ -146,11 +146,11 @@ pipeline {
 ////            }
 ////        }
 ////
-        stage('Unit Test') {
-            steps {
-                sh "./gradlew test${FLAVOR}CiUnitTest"
-            }
-        }
+//        stage('Unit Test') {
+//            steps {
+//                sh "./gradlew test${FLAVOR}CiUnitTest"
+//            }
+//        }
 
 //        stage('Android Test') {
 //            steps {
