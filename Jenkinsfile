@@ -146,11 +146,11 @@ pipeline {
 ////            }
 ////        }
 ////
-//        stage('Unit Test') {
-//            steps {
-//                sh "./gradlew test${FLAVOR}CiUnitTest"
-//            }
-//        }
+        stage('Unit Test') {
+            steps {
+                sh "./gradlew test${FLAVOR}CiUnitTest"
+            }
+        }
 
 //        stage('Android Test') {
 //            steps {
