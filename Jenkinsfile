@@ -167,6 +167,8 @@ pipeline {
 
         stage('SonarQube analysis') {
             steps {
+                sh "./gradlew jacocoTestReport"
+
                 script {
                     withSonarQubeEnv('SonarQube Server') {
                         retry(3) {
