@@ -15,9 +15,7 @@ services:
           - jenkins
 
   emulator:
-    image: behring/android-emulator:latest
-    environment:
-      EMULATOR: android-24
+    image: behring/android-emulator:24-armeabi-v7a
     ports:
       - "5555"
       - "80"
@@ -44,7 +42,7 @@ services:
         aliases:
           - jenkins
   sonarqube:
-    image: sonarqube
+    image: sonarqube:lts
     ports:
       - "9000:9000"
     environment:

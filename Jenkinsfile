@@ -38,7 +38,7 @@ pipeline {
     }
 
     environment {
-        FLAVOR = 'Prod'//Prod,Mock
+        FLAVOR = 'Mock'//Prod,Mock
     }
 
     stages {
