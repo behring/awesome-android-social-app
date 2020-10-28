@@ -21,7 +21,7 @@ buildscript {
 }
 
 subprojects {
-    apply from: "sonar.gradle"
+    apply from: "$rootDir/sonar.gradle"
     repositories {
         google()
         jcenter()
