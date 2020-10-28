@@ -3,6 +3,8 @@ ext {
     flavor='mockDebug'
 }
 
+
+
 buildscript {
     
     repositories {
@@ -19,7 +21,7 @@ buildscript {
 }
 
 subprojects {
-    apply plugin: "org.sonarqube"
+    apply from: "sonar.gradle"
     repositories {
         google()
         jcenter()
