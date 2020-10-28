@@ -8,7 +8,7 @@ cd ..
 #./gradlew clean pmd findbugs checkstyle lintProdDebug testProdDebugUnitTest connectedProdDebugAndroidTest
 
 #mock test
-./gradlew clean pmd findbugs checkstyle lintMockDebug testMockDebugUnitTest connectedMockDebugAndroidTest
+./gradlew clean pmd findbugs checkstyle lintMockDebug testMockDebugUnitTest connectedMockDebugAndroidTest jacocoTestReport
 
 ./gradlew sonarqube -Dsonar.branch=master -Dsonar.host.url=http://localhost:9001
 
