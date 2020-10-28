@@ -172,7 +172,8 @@ pipeline {
                 script {
                     withSonarQubeEnv('SonarQube Server') {
                         retry(3) {
-                            sh './gradlew sonarqube'
+                            // 也可以在jenkins的sonar server里面指定http://jenkins:9000，这里就直接写./gradlew sonarqube即可
+                            sh './gradlew sonarqube -Dsonar.host.url=http://jenkins:9000'
                         }
                     }
 
