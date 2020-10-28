@@ -3,8 +3,6 @@ apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
 
-def flavor='mockDebug'
-
 android {
     //如果不加这个，robolectric的ut不会被jacoco识别
     tasks.withType(Test) {
@@ -35,14 +33,14 @@ task jacocoTestReport(type: JacocoReport) {
                       '**/com/thoughtworks/awesomesocialapp/databinding/*',
                       '**/com/thoughtworks/awesomesocialapp/DataBindingInfo.*']
     def mainSrc = "${project.projectDir}/src/main/java"
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/${flavor}", excludes: fileFilter)
+    def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/${rootProject.flavor}", excludes: fileFilter)
 
     sourceDirectories = files([mainSrc])
     classDirectories = files([debugTree])
 
     executionData = fileTree(dir: "$buildDir", includes: [
-            "jacoco/test${flavor.capitalize()}UnitTest.exec",
-            "outputs/code_coverage/${flavor}AndroidTest/connected/*coverage.ec"
+            "jacoco/test${rootProject.flavor.capitalize()}UnitTest.exec",
+            "outputs/code_coverage/${rootProject.flavor}AndroidTest/connected/*coverage.ec"
     ])
 }
 
@@ -64,7 +62,7 @@ task findbugs(type: FindBugs, dependsOn: ['assemble']) {
     ignoreFailures = false
     effort = "max" // default max
     reportLevel = "low"//low medium high
-    classes = files("$project.buildDir/intermediates/javac/${flavor}")
+    classes = files("$project.buildDir/intermediates/javac/${rootProject.flavor}")
     excludeFilter = file("$rootProject.rootDir/config/findbugs/findbugs-exclude.xml")
 
     source = fileTree('src/main/java/')

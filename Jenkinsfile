@@ -172,7 +172,7 @@ pipeline {
                 script {
                     withSonarQubeEnv('SonarQube Server') {
                         retry(3) {
-                            sh './gradlew sonarqube -Dsonar.host.url=http://jenkins:9000'
+                            sh './gradlew sonarqube'
                         }
                     }
 
