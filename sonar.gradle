@@ -8,7 +8,7 @@ sonarqube {
         property "sonar.host.url", "http://localhost:9000"
         property "sonar.sourceEncoding", "UTF-8"
 
-        def unit = fileTree(dir: project.projectDir, includes: ['build/reports/jacoco/*.xml']).files
+        def unit = fileTree(dir: project.projectDir, includes: ['build/reports/jacoco/**/*.xml']).files
 //        def ui = fileTree(dir: project.projectDir, includes: ['**/*.ec']).files
 //        unit.addAll(ui)
         def files = unit.join(", ")
