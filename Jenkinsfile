@@ -171,14 +171,18 @@ pipeline {
 
                 script {
                     withSonarQubeEnv('SonarQube Server') {
+                        //注意这里withSonarQubeEnv()中的参数要与之前SonarQube servers中Name的配置相同
                         retry(3) {
                             // 也可以在jenkins的sonar server里面指定http://jenkins:9000，这里就直接写./gradlew sonarqube即可
                             sh './gradlew sonarqube -Dsonar.host.url=http://jenkins:9000'
                         }
                     }
+                    timeout(time: 2, unit: 'MINUTES') {
+                        //这里设置超时时间1分钟，不会出现一直卡在检查状态
+                        //利用sonar webhook功能通知pipeline代码检测结果，未通过质量阈，pipeline将会fail
 
-                    timeout(time: 5, unit: 'MINUTES') {
-                        def qg = waitForQualityGate()
+                        //注意：这里waitForQualityGate()中的参数也要与之前SonarQube servers中Name的配置相同
+                        def qg = waitForQualityGate('SonarQube Server')
                         if (qg.status != 'OK') {
                             error "Pipeline aborted due to quality gate failure: ${qg.status}"
                         }
