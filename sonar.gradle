@@ -2,19 +2,21 @@ apply plugin: "org.sonarqube"
 //sonar7.9以后不支持mysql了
 sonarqube {
     properties {
-        property "sonar.sources", "src/main/java/"
+        def srcDirs = fileTree(dir: project.projectDir, includes: ['build/reports/jacoco/**/*.xml']).files
+        def srcFiles = srcDirs.join(", ")
+        property "sonar.sources", srcFiles
         property "sonar.java.binaries", "."
         property "sonar.projectKey", "awesome-android-social-app:master"
         property "sonar.host.url", "http://localhost:9000"
         property "sonar.sourceEncoding", "UTF-8"
 
-        def unit = fileTree(dir: project.projectDir, includes: ['build/reports/jacoco/**/*.xml']).files
+        def unit = fileTree(dir: project.projectDir, includes: ['**/build/reports/jacoco/**/*.xml']).files
 //        def ui = fileTree(dir: project.projectDir, includes: ['**/*.ec']).files
 //        unit.addAll(ui)
         def files = unit.join(", ")
         property "sonar.coverage.jacoco.xmlReportPaths", files
         property "sonar.java.coveragePlugin", "jacoco"
-        property "sonar.junit.reportsPath", "$project.projectDir/build/test-results/test${rootProject.flavor.capitalize()}UnitTest"
-        property "sonar.android.lint.report", "$project.projectDir/build/reports/lint-results.xml"
+        property "sonar.junit.reportsPath", "$project.projectDir/**/build/test-results/test${rootProject.flavor.capitalize()}UnitTest"
+        property "sonar.android.lint.report", "$project.projectDir/**/build/reports/lint-results.xml"
     }
 }
