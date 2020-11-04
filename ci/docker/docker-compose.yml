@@ -44,7 +44,7 @@ services:
         aliases:
           - jenkins
   sonarqube:
-    image: sonarqube:lts
+    image: sonarqube
     ports:
       - "9000:9000"
     environment:
