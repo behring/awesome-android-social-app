@@ -29,7 +29,6 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ["test${rootProject.flavor.
                       '**/*Test*.*',
                       '**/*BR*.*',
                       '**/DataBinderMapperImpl*.*',
-                      '**/android/*',
                       '**/com/thoughtworks/awesomesocialapp/databinding/*',
                       '**/com/thoughtworks/awesomesocialapp/DataBindingInfo.*']
     def mainSrc = "${project.projectDir}/src/main/java"
