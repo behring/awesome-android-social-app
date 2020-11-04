@@ -2,9 +2,7 @@ apply plugin: "org.sonarqube"
 //sonar7.9以后不支持mysql了
 sonarqube {
     properties {
-        def srcDirs = fileTree(dir: project.projectDir, includes: ['**/src/main/java/**']).files
-        def srcFiles = srcDirs.join(", ")
-        property "sonar.sources", srcFiles
+        property "sonar.sources", '**/src/main/java'
         property "sonar.java.binaries", "."
         property "sonar.projectKey", "awesome-android-social-app:master"
         property "sonar.host.url", "http://localhost:9000"
