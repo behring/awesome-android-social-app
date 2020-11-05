@@ -173,8 +173,8 @@ pipeline {
                     withSonarQubeEnv('SonarQube Server') {
                         //注意这里withSonarQubeEnv()中的参数要与之前SonarQube servers中Name的配置相同
                         retry(3) {
-                            // 也可以在jenkins的sonar server里面指定http://jenkins:9000，这里就直接写./gradlew sonarqube即可
-                            sh './gradlew sonarqube -Dsonar.host.url=http://jenkins:9000'
+                            // 也可以在jenkins的sonar server里面指定http://sonarqube:9000，这里就直接写./gradlew sonarqube即可
+                            sh './gradlew sonarqube -Dsonar.host.url=http://sonarqube:9000'
                         }
                     }
                     timeout(time: 2, unit: 'MINUTES') {
