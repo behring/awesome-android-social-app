@@ -10,12 +10,8 @@ android {
     }
 }
 
-//task jacocoTestReportRun(type: JacocoReport, dependsOn: ["test${flavor.capitalize()}UnitTest",
-//                                                      "create${flavor.capitalize()}CoverageReport"]) {
-//}
-
-task jacocoTestReport(type: JacocoReport, dependsOn: ["test${rootProject.flavor.capitalize()}UnitTest"]) {
-
+task jacocoTestReportRun(type: JacocoReport, dependsOn: ["test${flavor.capitalize()}UnitTest",
+                                                      "create${flavor.capitalize()}CoverageReport"]) {
     reports {
         xml.enabled = true
         html.enabled = true
